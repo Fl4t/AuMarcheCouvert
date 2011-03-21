@@ -1,0 +1,165 @@
+p, td {
+   text-align: justify; 
+   color: #666; /* pas besoin de 6 caractères, au bout de 3 il simule le reste identique */
+   font-size: 16px;
+   font-family: "Lucida Grande", Arial, sans-serif;
+   margin-left : 15px; /* On décale le texte de 15px par rapport au titres h2 */
+}
+
+h1 { 
+   color: #666; 
+   font-size: 60px; 
+   font-family: "Lucida Grande", Arial, sans-serif; 
+   text-align: center; 
+   letter-spacing: -1px; 
+}
+
+h2 { 
+   color: #666;
+   font-size: 30px;
+   font-family: "Lucida Grande", Arial, sans-serif;
+   font-weight: normal; /* Car h2 et en bold par defaut, donc je le force en normal */
+   letter-spacing: -1px;
+   margin: 10px 0 0 0; /* Marge de 10px au dessus */
+}
+table {
+   background-color: #ced7de;
+   margin-top: 10px; /* Marges */
+   margin-left: auto;
+   margin-right: auto;
+   margin-bottom: 10px;
+   padding: 5px;
+   border: solid 1px #999; /* bordure de type ligne continue de 1px avec couleur 999 */
+   -moz-border-radius: 5px; 
+   -moz-box-shadow:0 0 15px #aaa;
+}
+
+table .equilibrage {
+   width: 100px;
+}
+
+option {
+   color: #666; /* pas besoin de 6 caractères, au bout de 3 il simule le reste identique */
+   font-size: 16px;
+   font-family: "Lucida Grande", Arial, sans-serif;
+}
+
+select {
+   color: #666; /* pas besoin de 6 caractères, au bout de 3 il simule le reste identique */
+   font-size: 16px;
+   width: 200px;
+   font-family: "Lucida Grande", Arial, sans-serif;
+}   
+
+input[type="text"] {
+	border:1px solid #aaa;
+	-moz-border-radius:3px;
+   width: 200px;
+	padding:2px;
+   color: #666; /* pas besoin de 6 caractères, au bout de 3 il simule le reste identique */
+   font-size: 16px;
+   font-family: "Lucida Grande", Arial, sans-serif;
+}
+
+input[type="text"]:focus {
+	-moz-box-shadow:0 0 5px ;
+}
+
+input[type="submit"] {
+   color: #666; /* pas besoin de 6 caractères, au bout de 3 il simule le reste identique */
+   font-size: 16px;
+   font-family: "Lucida Grande", Arial, sans-serif;
+}
+
+/* Formatage CSS pour le cadre de la page */
+#cadre { 
+   position: relative; /* Pour centrer le cadre dans le navigateur */ 
+   width: 1000px;
+   margin-top: 18px; /* Marges */
+   margin-left: auto;
+   margin-right: auto;
+   margin-bottom: 18px;
+   border: solid 1px #999; /* bordure de type ligne continue de 1px avec couleur 999 */
+   -moz-border-radius: 5px; 
+   -moz-box-shadow:0 0 15px #aaa;
+   
+}
+/* Formattage CSS pour l'en-tête de la page */
+header {
+   display: block;
+   background-image: url("images/degrade-haut.jpg");
+   background-position: top;
+   height: 304px;
+   width: 1000px;
+}
+/* Formatage CSS pour le cadre titre */
+#titre {
+   width: 1000px;
+   position: absolute; 
+   top: 50px;
+   visibility: visible; 
+}
+/* style du cadre du menu générale */
+nav { 
+   display: block;
+   position: relative; /* Pour centrer le texte dans le #cadre */ 
+   top: -100px; /* remonte la barre de 100px pour passer au dessus de header */
+}
+
+ul#onglet {
+   color: #999; 
+   font-size: 16px; 
+   font-family: "Lucida Grande", Arial, sans-serif; 
+   list-style-type: none; /* Style de liste non formatée pour faire un menu en ligne */
+   padding-bottom: 31px;
+   border-bottom: 1px solid #999;
+}
+
+ul#onglet li {
+   color: #fff;
+   float: left;
+   height: auto;
+   background-color: #ced7de;
+   margin: 2px 2px 2px 2px;
+   border: 1px solid #999;
+   -moz-border-radius: 5px 5px 0 0; 
+}
+
+ul#onglet li.actif {
+   border-bottom: 1px solid #fff;
+   background-color: #fff;
+   -moz-border-radius: 5px 5px 0 0; 
+}
+
+#onglet a {
+   float: left;
+   display: block;
+   color: #666;
+   text-decoration: none;
+   letter-spacing: -1px;
+   padding: 4px;
+}
+
+#onglet a:hover {
+   background: #fff;
+   -moz-border-radius: 5px 5px 0 0; /* Sans, les coins s'éffacent... */ 
+}
+
+/* Formatage CSS pour le cadre du texte */
+#texte { 
+   position: relative; /* Pour centrer le #cadre */ 
+   top: -50px; /* remonte de 100px par rapport a la position par defaut */
+   letter-spacing: -1px; 
+   width: 800px; 
+   margin: auto; /* Ajustement centrale du cadre texte */
+   margin-bottom: -150px; /* Pour remonter le footer de 100px */
+}
+
+/* Formatage CSS du pied de page */
+footer {
+   display: block;
+   background-image: url("images/degrade-bas.jpg");
+   background-position: bottom;
+   height: 304px;
+   width: 1000px;
+}
