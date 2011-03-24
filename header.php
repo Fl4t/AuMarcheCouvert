@@ -1,6 +1,12 @@
 <?php
-// On démarre la session AVANT d'écrire du code HTML
-session_start();
+   // On démarre la session AVANT d'écrire du code HTML
+   session_start();
+   //session_destroy();
+
+   // Subdivision du panier
+   $_SESSION['NomRestaurant'] = string;
+   $_SESSION['Panier']['DesignProduit'] = array();
+   $_SESSION['Panier']['QuantiteProduit'] = array();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -20,12 +26,13 @@ session_start();
          // Chargement des fonctions.
          include("fonctions.php");
          
-         // Test de la connexion à la base de donnée, si ça échoue, il affiche l'érreur.
+         // Appel de la fonction de type procédure P_ConnexionBDD
+         //P_ConnexionBDD();
          try
          {
-            $bdd = new PDO('mysql:host=localhost;dbname=AuMarcheCouvert;', 'root', 'root');
+            $objBDD = new PDO('mysql:host=localhost;dbname=AuMarcheCouvert;', 'root', 'root');
          }
-            catch(Exception $e)
+         catch(Exception $e)
          {
             die('Erreur : ' . $e->getMessage());
          }
@@ -35,7 +42,7 @@ session_start();
          <!-- Placement de l'image "degrade-haut.php" via le css -->
          </header>
          <div id="titre">
-            <h1>Au marché couvert<h1>
+            <h1>Au marché couvert</h1>
          </div>
          <nav>
             <ul id="onglet">
