@@ -39,7 +39,7 @@
                      <?php
                         echo '<td><label for="listeProduits' . $intCompteur . '">Choisissez un produit :</label></td>';
                         echo '<td class="equilibrage" rowspan="2"></td>';
-                        echo '<td><label for="textQuantiteProduit' . $intCompteur . '">Quantité souhaité :</label></td>';
+                        echo '<td><label for="QuantiteProduit' . $intCompteur . '">Quantité souhaité :</label></td>';
                      ?>
                      <td class="equilibrage" rowspan="2"></td>
                   </tr>
@@ -64,7 +64,7 @@
                      </td>
                      <!-- On demande la quantité -->
                      <?php
-                        echo '<td><input type="text" name="textQuantiteProduit' . $intCompteur . '" id="textQuantiteProduit' . $intCompteur . '" /></td>';
+                        echo '<td><input type="text" name="QuantiteProduit' . $intCompteur . '" id="QuantiteProduit' . $intCompteur . '" /></td>';
                      ?>   
                   </tr>
                </table>
