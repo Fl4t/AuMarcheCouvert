@@ -3,10 +3,14 @@
    session_start();
    //session_destroy();
 
+   // Chargement des fonctions.
+   include("fonctions.php");
+
    // Subdivision du panier
    $_SESSION['NomRestaurant'] = string;
    $_SESSION['Panier']['DesignProduit'] = array();
    $_SESSION['Panier']['QuantiteProduit'] = array();
+   $_SESSION['Panier']['PrixProduit'] = array();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -23,19 +27,16 @@
    </head>
    <body>
       <?php 
-         // Chargement des fonctions.
-         include("fonctions.php");
-         
-         // Appel de la fonction de type procédure P_ConnexionBDD
-         //P_ConnexionBDD();
-         try
-         {
-            $objBDD = new PDO('mysql:host=localhost;dbname=AuMarcheCouvert;', 'root', 'root');
-         }
-         catch(Exception $e)
-         {
-            die('Erreur : ' . $e->getMessage());
-         }
+         // Appel de la fonction de type procédure ConnexionBDD
+         ConnexionBDD();
+         //try
+         //{
+            //$objBDD = new PDO('mysql:host=localhost;dbname=AuMarcheCouvert;', 'root', 'root');
+         //}
+         //catch(Exception $e)
+         //{
+            //die('Erreur : ' . $e->getMessage());
+         //}
       ?>
       <div id="cadre">
          <header>
