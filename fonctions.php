@@ -22,6 +22,7 @@ function ConnexionBDD()
    try
    {
       $objBDD = new PDO('mysql:host=localhost;dbname=AuMarcheCouvert;', 'root', 'root');
+      return $objBDD;
    }
    catch(Exception $e)
    {
@@ -30,7 +31,7 @@ function ConnexionBDD()
 }
 
 // Fonction TransfertPostSession
-// On affecte toutes les valeurs de la superglobale $_POST à $_SESSION si il sont valide. 
+// On affecte toutes les valeurs de la superglobale $_POST à $_SESSION si ils sont valide. 
 function TransfertPostDansSession()
 {
    // Si le restaurant a été renseigné, on continue.
@@ -59,32 +60,20 @@ function TransfertPostDansSession()
          }
       }
    }
-
    // affichage pour savoir si c'est fait.
-   echo '<pre>';
-   echo 'SESSION : <br />';
-   print_r($_SESSION);
-   echo '</pre>';
+   //echo '<pre>';
+   //echo 'SESSION : <br />';
+   //print_r($_SESSION);
+   //echo '</pre>';
 }
 
 function PrixDuProduit($NomProduit)
 {
+   global $objBDD; // On travaille sur la variable globale $objBDD.
    // On va chercher le prix du produits contenu en paramètre
    $objPrixProduits = $objBDD->query('SELECT PrixProduit FROM Produits WHERE DesignProduit = \''.$NomProduit.'\'') or die(print_r($objBDD->errorInfo()));
    $PrixProduit = $objPrixProduits->fetch();
    $objPrixProduits->closeCursor();
-   return $PrixProduit;
+   return $PrixProduit['PrixProduit']; // On retourne la valeur du champ PrixProduit
 }
-
-
-////////// il faut faire une fonction qui corrige le panier si le mec il choisi le meme produit dans deux listes differentes
-function AjoutDesQuantites()
-{
-} 
-
-  
-   
-
-
-
 ?>
