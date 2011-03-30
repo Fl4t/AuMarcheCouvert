@@ -28,15 +28,7 @@
    <body>
       <?php 
          // Appel de la fonction de type procédure ConnexionBDD
-         ConnexionBDD();
-         //try
-         //{
-            //$objBDD = new PDO('mysql:host=localhost;dbname=AuMarcheCouvert;', 'root', 'root');
-         //}
-         //catch(Exception $e)
-         //{
-            //die('Erreur : ' . $e->getMessage());
-         //}
+         $objBDD = ConnexionBDD();
       ?>
       <div id="cadre">
          <header>
