@@ -14,10 +14,10 @@ define('intTVA',1.055);
 //                                          //
 //////////////////////////////////////////////
 
-// Fonction P_ConnexionBDD
+// Fonction ConnexionBDD
 // On se connecte sur la base de donnée en passant par un essai
 // affiche une erreur explicite.
-function P_ConnexionBDD()
+function ConnexionBDD()
 {
    try
    {
@@ -29,25 +29,33 @@ function P_ConnexionBDD()
    }
 }
 
-// Fonction F_TransfertPostSession
+// Fonction TransfertPostSession
 // On affecte toutes les valeurs de la superglobale $_POST à $_SESSION si il sont valide. 
-function F_TransfertPostDansSession()
+function TransfertPostDansSession()
 {
    // Si le restaurant a été renseigné, on continue.
    if ($_POST['listeRestaurant'] != "Vide")
    {
       $_SESSION['NomRestaurant'] = $_POST['listeRestaurant'];
-      
+      // On crée un compteur pour ajouter à la suite du tableau.
+      $intCompteurAjout = 0;
       for($NombreDeProduits=1;$NombreDeProduits<=5;$NombreDeProduits++)
       {
-         // Si le produit a été séléctionné et qu'une quantité a été tapé et qu'elle est différente de zéro.
-         if ($_POST['listeProduits' . $NombreDeProduits] != "Vide" AND $_POST['textQuantiteProduit' . $NombreDeProduits] != 0)
+         // Si le produit a été séléctionné et qu'une quantité a été tapé et qu'elle est supérieur à 1.
+         if ($_POST['listeProduits' . $NombreDeProduits] != "Vide")
          {
-            // On remplie le tableau 'DesignProduit' qui ce trouve lui même dans le tabeau à l'index 0 de 'Panier'
-            $_SESSION['Panier']['DesignProduit'][$NombreDeProduits] = $_POST['listeProduits' . $NombreDeProduits];
-            // On remplie le tableau 'QuantiteProduit' qui ce trouve lui même dans le tabeau à l'index 0 de 'Panier'
-            // On force tout ce qui a pu être tapé en entier, si c'était autre chose qu'un entier, ça vaudra 0 
-            $_SESSION['Panier']['QuantiteProduit'][$NombreDeProduits] = (integer) ($_POST['textQuantiteProduit' . $NombreDeProduits]);
+            if ($_POST['QuantiteProduit' . $NombreDeProduits] != 0)
+            {
+               // On incrémente le compteur quand les conditions sont vraies.
+               $intCompteurAjout += 1;
+               // On remplie le tableau 'DesignProduit' qui ce trouve lui même dans le tabeau à l'index 0 de 'Panier'
+               $_SESSION['Panier']['DesignProduit'][$intCompteurAjout] = $_POST['listeProduits' . $NombreDeProduits];
+               // On remplie le tableau 'QuantiteProduit' qui ce trouve lui même dans le tabeau à l'index 1 de 'Panier'
+               // On force tout ce qui a pu être tapé en entier, si c'était autre chose qu'un entier, ça vaudra 0 
+               $_SESSION['Panier']['QuantiteProduit'][$intCompteurAjout] = (integer) ($_POST['QuantiteProduit' . $NombreDeProduits]);
+               // On ajoute le prix du produit via la fonction PrixDuProduit.
+               $_SESSION['Panier']['PrixProduit'][$intCompteurAjout] = PrixDuProduit($_SESSION['Panier']['DesignProduit'][$intCompteurAjout]);
+            }
          }
       }
    }
@@ -59,31 +67,24 @@ function F_TransfertPostDansSession()
    echo '</pre>';
 }
 
-////////// il faut faire une fonction qui corrige le panier si le mec il choisi le meme produit dans deux listes differentes
-////////// regrouper les quantités quoi.
-////////// Il faut faire aussi une fonction qui supprime les trous entre les enregistrement du tableau, (voir le cour d'algo)
+function PrixDuProduit($NomProduit)
+{
+   // On va chercher le prix du produits contenu en paramètre
+   $objPrixProduits = $objBDD->query('SELECT PrixProduit FROM Produits WHERE DesignProduit = \''.$NomProduit.'\'') or die(print_r($objBDD->errorInfo()));
+   $PrixProduit = $objPrixProduits->fetch();
+   $objPrixProduits->closeCursor();
+   return $PrixProduit;
+}
 
-/*// Fonction F_NomDuProduit */
-//// Extrait de la base de donnée les noms des produits.
-//function F_NomDuProduit()
-//{
-   //// On va lire sur la base de donnée pour en tirer les prix des Produits.
-   //$objPrixProduits = $objBDD->query('SELECT PrixProduit FROM Produits') or die(print_r($objBDD->errorInfo()));
-   //// On range les valeurs dans un tableau associatif
-   //$dblTableauPrixProduits = $objPrixProduits->fetch();
-   //$objPrixProduits->closeCursor(); // Termine le traitement de la requête
-//}
+
+////////// il faut faire une fonction qui corrige le panier si le mec il choisi le meme produit dans deux listes differentes
+function AjoutDesQuantites()
+{
+} 
+
   
-//// Requete préparée.
-//$objPrixProduits = $objBDD->prepare('SELECT PrixProduit FROM Produits WHERE DesignProduit = :NomProduit') or die(print_r($objBDD->errorInfo()));
-//$dblTableauPrixProduits->execute(array('NomProduit' => $_SESSION['ListeProduits1']));
    
 
 
 
-//// test //
-//echo '<br/>';
-//echo '<pre>';
-//print_r($dblTableauPrixProduits);
-/*echo '</pre>';*/
 ?>
