@@ -1,6 +1,7 @@
                <?php include("header.php");?>
                <li><a href="index.php">Acceuil</a></li>
                <li class="actif"><a href="commande.php">Nouvelle Commande</a></li>
+               <li><a href="consultation.php">Consultation</a></li>
             </ul>
          </nav>
          <div id="texte">
@@ -17,14 +18,14 @@
                         echo '<option value="Vide" selected="selected"></option>';
                         
                         // On récupère les noms des objRestaurants, sinon il y aura une erreur explicite.
-                        $objRestaurants = $objBDD->query('SELECT NomRestaurant FROM restaurants') or die(print_r($objBDD->errorInfo()));
+                        $objNomRestaurants = $objBDD->query('SELECT NomRestaurant FROM restaurants') or die(print_r($objBDD->errorInfo()));
                         
                         // On affiche les noms des objRestaurants dans une liste déroulante.
-                        while ($strTableauRestaurants = $objRestaurants->fetch())
+                        while ($strTableauNomRestaurants = $objNomRestaurants->fetch())
                         {
-                           echo '<option value="' . $strTableauRestaurants['NomRestaurant'] . '">' . $strTableauRestaurants['NomRestaurant'] . '</option>';
+                           echo '<option value="' . $strTableauNomRestaurants['NomRestaurant'] . '">' . $strTableauNomRestaurants['NomRestaurant'] . '</option>';
                         }
-                        $objRestaurants->closeCursor(); // Termine le traitement de la requête
+                        $objNomRestaurants->closeCursor(); // Termine le traitement de la requête
                      ?>
                   </select>
                </p> 
@@ -38,8 +39,8 @@
                      <td class="equilibrage" rowspan="2"></td>
                      <?php
                         echo '<td><label for="listeProduits' . $intCompteur . '">Choisissez un produit :</label></td>';
-                        echo '<td class="equilibrage" rowspan="2"></td>';
                         echo '<td><label for="QuantiteProduit' . $intCompteur . '">Quantité souhaité :</label></td>';
+                        echo '<td><label for="PrixDuJour' . $intCompteur . '">Prix du jour :</label></td>';
                      ?>
                      <td class="equilibrage" rowspan="2"></td>
                   </tr>
@@ -62,9 +63,10 @@
                            echo '</select>';
                         ?>
                      </td>
-                     <!-- On demande la quantité -->
+                     <!-- On demande la quantité et le prix du jour -->
                      <?php
                         echo '<td><input type="text" name="QuantiteProduit' . $intCompteur . '" id="QuantiteProduit' . $intCompteur . '" /></td>';
+                        echo '<td><input type="text" name="PrixDuJour' . $intCompteur . '" id="PrixDuJour' . $intCompteur . '" /></td>';
                      ?>   
                   </tr>
                </table>
