@@ -1,16 +1,9 @@
 <?php
    // On démarre la session AVANT d'écrire du code HTML
    session_start();
-   //session_destroy();
 
    // Chargement des fonctions.
    include("fonctions.php");
-
-   // Subdivision du panier
-   $_SESSION['NomRestaurant'] = string;
-   $_SESSION['Panier']['DesignProduit'] = array();
-   $_SESSION['Panier']['QuantiteProduit'] = array();
-   $_SESSION['Panier']['PrixProduit'] = array();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -28,7 +21,7 @@
    <body>
       <?php 
          // Appel de la fonction de type procédure ConnexionBDD
-         $objBDD = ConnexionBDD();
+         $objBDD = F_ConnexionBDD();
       ?>
       <div id="cadre">
          <header>
