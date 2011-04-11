@@ -13,7 +13,7 @@
             </ul>
          </div>
          <div id="texte-administration">
-               <form method="post" action="traitement-ajout.php">
+               <form method="post" action="traitement/traitement-ajout.php">
                   <p>
                      Que voulez-vous ajouter ?<br />
                      <input type="radio" name="ajout" value="restaurant" id="restaurant" /><label for="restaurant">un restaurant</label><br />

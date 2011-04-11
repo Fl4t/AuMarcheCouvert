@@ -10,7 +10,7 @@
             <p>
                Choisissez les produits ainsi que les quantités souhaités.<br />
             </p>
-            <form method="post" action="traitement-commande.php">
+            <form method="post" action="traitement/traitement-commande.php">
                <p> 
                   <label for="listeRestaurant">Choisissez un restaurant : </label>
                   <select name="listeRestaurant" id="listeRestaurant">

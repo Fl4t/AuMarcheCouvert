@@ -3,7 +3,7 @@
    session_start();
 
    // Chargement des fonctions.
-   include("fonctions.php");
+   include("traitement/fonctions.php");
 ?>
 <!DOCTYPE html>
 <html lang="fr">

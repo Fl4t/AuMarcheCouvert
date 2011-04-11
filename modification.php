@@ -13,5 +13,14 @@
             </ul>
          </div>
          <div id="texte-administration">
+               <form method="post" action="traitement/traitement-modification.php">
+                  <p>
+                     Que voulez-vous modifier ?<br />
+                     <input type="radio" name="ajout" value="restaurant" id="restaurant" /><label for="restaurant">un restaurant</label><br />
+                     <input type="radio" name="ajout" value="produit" id="produit" /><label for="produit">un produit</label>
+                     <br />
+                     <input type="submit" value="Continuer" /></center>
+                  </p>
+               </form>
          </div>
          <?php include("footer.php");?>
