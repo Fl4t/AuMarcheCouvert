@@ -2,6 +2,7 @@
                <li class="actif"><a href="index.php">Accueil</a></li>
                <li><a href="commande.php">Nouvelle Commande</a></li>
                <li><a href="consultation.php">Consultation</a></li>
+               <li><a href="administration.php">Administration</a></li>
             </ul>
          </nav>
          <div id="texte">

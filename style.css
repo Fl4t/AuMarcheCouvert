@@ -108,8 +108,8 @@ input[type="submit"] {
    border: solid 1px #999; /* bordure de type ligne continue de 1px avec couleur 999 */
    -moz-border-radius: 5px; 
    -moz-box-shadow:0 0 15px #aaa;
-   
 }
+
 /* Formattage CSS pour l'en-tête de la page */
 header {
    display: block;
@@ -118,6 +118,7 @@ header {
    height: 304px;
    width: 1000px;
 }
+
 /* Formatage CSS pour le cadre titre */
 #titre {
    width: 1000px;
@@ -125,6 +126,7 @@ header {
    top: 50px;
    visibility: visible; 
 }
+
 /* style du cadre du menu générale */
 nav { 
    display: block;
@@ -159,7 +161,6 @@ ul#onglet li.actif {
 
 #onglet a {
    float: left;
-   display: block;
    color: #666;
    text-decoration: none;
    letter-spacing: -1px;
@@ -171,14 +172,64 @@ ul#onglet li.actif {
    -moz-border-radius: 5px 5px 0 0; /* Sans, les coins s'éffacent... */ 
 }
 
+/* style du cadre du sous-menu administration */
+#panneau { 
+   position: relative; /* Pour centrer le #cadre */
+   width: 800px;
+   margin: auto; /* Ajustement centrale du cadre texte */
+   top: -100px;
+}
+
+#panneau ul {
+    color: #999999;
+    font-family: "Lucida Grande",Arial,sans-serif;
+    font-size: 16px;
+    list-style-type: none;
+    padding-bottom: 31px;   
+}
+
+#panneau li {
+   color: #fff;
+   float: left;
+   background-color: #ced7de;
+   margin: 2px 2px 2px 2px;
+   border: 1px solid #999;
+}
+
+#panneau li.actif {
+   background-color: #fff;
+}
+
+#panneau a {
+   display: block;
+   color: #666;
+   text-decoration: none;
+   letter-spacing: -1px;
+   padding: 10px 60px 10px 60px;
+   top: -100px;
+}
+
+#panneau a:hover {
+   background: #fff;
+   padding: 10px 60px 10px 60px;
+}
+
 /* Formatage CSS pour le cadre du texte */
 #texte { 
    position: relative; /* Pour centrer le #cadre */ 
    top: -50px; /* remonte de 100px par rapport a la position par defaut */
    letter-spacing: -1px; 
    width: 800px; 
-   margin: auto; /* Ajustement centrale du cadre texte */
-   margin-bottom: -150px; /* Pour remonter le footer de 100px */
+   margin: auto auto -150px; /* Ajustement centrale du cadre texte et remonter le footer de 150*/
+}
+
+/* Formatage CSS pour le cadre du texte administration */
+#texte-administration { 
+   position: relative; /* Pour centrer le #cadre */ 
+   top: -50px; /* remonte de 100px par rapport a la position par defaut */
+   letter-spacing: -1px; 
+   width: 800px; 
+   margin: auto auto -150px; /* Ajustement centrale du cadre texte et remonter le footer de 150*/
 }
 
 /* Formatage CSS du pied de page */

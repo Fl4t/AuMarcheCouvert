@@ -91,6 +91,25 @@ function F_RefDuProduit($strNomProduit)
    return $intRefProduit['RefProduit'];
 }
 
+function F_AjoutRestaurant()
+{
+   global $objBDD; // On travaille sur la variable globale $objBDD.
+   // Je fais les insertions à l'aide d'une requête préparée.
+   $objPreparation = $objBDD->prepare('INSERT INTO Restaurants VALUES('',:NomRestaurant,:Adr1Restaurant,:Adr2Restaurant,:CpRestaurant,:VilleRestaurant,:MelRestaurant,:TelRestaurant)');
+   $objPreparation->execute(array(
+   '' =>,
+      return;
+}
+
+function F_AjoutProduit()
+{
+   global $objBDD; // On travaille sur la variable globale $objBDD.
+   // Je fais les insertions à l'aide d'une requête préparée.
+   $objPreparation = $objBDD->prepare('INSERT INTO Produits VALUES('',:,:,:)');
+   $objPreparation->execute(array(
+   '' =>,
+      return;
+}
 //function LectureBDD($strRequete)
 //{
    //global $objBDD; // On travaille sur la variable globale $objBDD.
