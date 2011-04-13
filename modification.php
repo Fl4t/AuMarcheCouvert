@@ -14,10 +14,10 @@
          </div>
          <div id="texte-administration">
                <form method="post" action="traitement/traitement-modification.php">
-                  <p>
+                  <p class="centrer">
                      Que voulez-vous modifier ?<br />
-                     <input type="radio" name="ajout" value="restaurant" id="restaurant" /><label for="restaurant">un restaurant</label><br />
-                     <input type="radio" name="ajout" value="produit" id="produit" /><label for="produit">un produit</label>
+                     <input type="radio" name="modification" value="restaurant" id="restaurant" /><label for="restaurant">un restaurant</label><br />
+                     <input type="radio" name="modification" value="produit" id="produit" /><label for="produit">un produit</label>
                      <br />
                      <input type="submit" value="Continuer" /></center>
                   </p>
