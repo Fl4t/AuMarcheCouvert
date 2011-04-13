@@ -22,9 +22,9 @@
                <p>
                   <strong>Modification</strong> permet d'actualiser des données sur des restaurants ou produits existants.
                </p>
-               <h2>Suppréssion</h2> 
+               <h2>Suppression</h2> 
                <p>
-                  <strong>Suppréssion</strong> permet de retirer des produits qui ne sont plus utilisées ou un restaurant.
+                  <strong>Suppression</strong> permet de retirer des produits qui ne sont plus utilisées ou un restaurant.
                </p>
             </blockquote>
          </div>
