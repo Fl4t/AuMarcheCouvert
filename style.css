@@ -223,12 +223,11 @@ ul#onglet li.actif {
    margin: auto auto -150px; /* Ajustement centrale du cadre texte et remonter le footer de 150*/
 }
 
-/* Formatage CSS pour le cadre du texte administration */
-#texte-administration { 
+#question {
    position: relative; /* Pour centrer le #cadre */ 
    top: -50px; /* remonte de 100px par rapport a la position par defaut */
    letter-spacing: -1px; 
-   width: 800px; 
+   width: 300px; 
    margin: auto auto -150px; /* Ajustement centrale du cadre texte et remonter le footer de 150*/
 }
 
