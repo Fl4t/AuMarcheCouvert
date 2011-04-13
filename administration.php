@@ -12,7 +12,7 @@
                <li><a href="suppression.php">Suppression</a></li>
             </ul>
          </div>
-         <div id="texte-administration">
+         <div id="texte">
             <blockquote>
                <h2>Ajout</h2>
                <p>
