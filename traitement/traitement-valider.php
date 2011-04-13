@@ -28,7 +28,7 @@
                      echo '<p class="centrer">';
                      echo 'Commande ajoutée !';
                      echo '<br />';
-                     echo '<a href=index.php>Retour à l\'index</a>';
+                     echo '<a href=../index.php>Retour à l\'index</a>';
                      echo '</p>';
                      // Détruit la variable SESSION puisque l'on à fini !
                      session_destroy();
@@ -43,7 +43,7 @@
                   echo '<p class="centrer">';
                   echo 'Commande annulée.';
                   echo '<br />';
-                  echo '<a href=index.php>Retour à l\'index</a>';
+                  echo '<a href=../index.php>Retour à l\'index</a>';
                   echo '</p>';
                }
             ?>

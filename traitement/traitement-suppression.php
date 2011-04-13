@@ -25,7 +25,7 @@
                   echo '<p class="centrer">';
                   echo 'Suppression annulée.';
                   echo '<br />';
-                  echo '<a href=index.php>Retour à l\'index</a>';
+                  echo '<a href=../index.php>Retour à l\'index</a>';
                   echo '</p>';
                }
             ?>

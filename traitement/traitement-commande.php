@@ -18,7 +18,7 @@
                if ($intNombreDeProduits != 0) 
                {
                   echo '<table>';
-                  echo '<h3><strong>' . $_SESSION['NomRestaurant'] . '</strong></h3>';
+                  echo '<h3><strong>'.htmlspecialchars($_SESSION['NomRestaurant']).'</strong></h3>';
                   echo '<thead>';
                   echo '<tr>';
                   echo '<td class="recapitulatif">Produits :</td>';
@@ -32,17 +32,17 @@
                   for($intAffichage=1;$intAffichage <= $intNombreDeProduits -1;$intAffichage++)
                   {
                      echo '<tr>';
-                     echo '<td class="recapitulatif">' . $_SESSION['Panier']['DesignProduit'][$intAffichage] . '</td>';
-                     echo '<td class="recapitulatif">' . $_SESSION['Panier']['QuantiteProduit'][$intAffichage] . '</td>';
-                     echo '<td class="recapitulatif">' . $_SESSION['Panier']['PrixDuJour'][$intAffichage] . '</td>';
-                     echo '<td class="recapitulatif">' . $_SESSION['Panier']['PrixDuJour'][$intAffichage] * $_SESSION['Panier']['QuantiteProduit'][$intAffichage] . '</td>';
+                     echo '<td class="recapitulatif">'.htmlspecialchars($_SESSION['Panier']['DesignProduit'][$intAffichage]).'</td>';
+                     echo '<td class="recapitulatif">'.htmlspecialchars($_SESSION['Panier']['QuantiteProduit'][$intAffichage]) . '</td>';
+                     echo '<td class="recapitulatif">'.htmlspecialchars($_SESSION['Panier']['PrixDuJour'][$intAffichage]).'</td>';
+                     echo '<td class="recapitulatif">'.htmlspecialchars($_SESSION['Panier']['PrixDuJour'][$intAffichage])*htmlspecialchars($_SESSION['Panier']['QuantiteProduit'][$intAffichage]).'</td>';
                      echo '</tr>';
                   }
                echo '<tr>'; // on affiche le dernier séparement pour ne pas avoir de border-bottom.
-               echo '<td class="centrer">' . $_SESSION['Panier']['DesignProduit'][$intNombreDeProduits] . '</td>';
-               echo '<td class="centrer">' . $_SESSION['Panier']['QuantiteProduit'][$intNombreDeProduits] . '</td>';
-               echo '<td class="centrer">' . $_SESSION['Panier']['PrixDuJour'][$intNombreDeProduits] . '</td>';
-               echo '<td class="centrer">' . $_SESSION['Panier']['PrixDuJour'][$intNombreDeProduits] * $_SESSION['Panier']['QuantiteProduit'][$intNombreDeProduits] . '</td>';
+               echo '<td class="centrer">'.htmlspecialchars($_SESSION['Panier']['DesignProduit'][$intNombreDeProduits]).'</td>';
+               echo '<td class="centrer">'.htmlspecialchars($_SESSION['Panier']['QuantiteProduit'][$intNombreDeProduits]).'</td>';
+               echo '<td class="centrer">'.htmlspecialchars($_SESSION['Panier']['PrixDuJour'][$intNombreDeProduits]).'</td>';
+               echo '<td class="centrer">'.htmlspecialchars($_SESSION['Panier']['PrixDuJour'][$intNombreDeProduits])*htmlspecialchars($_SESSION['Panier']['QuantiteProduit'][$intNombreDeProduits]).'</td>';
                echo '</tr>';
                echo '</tbody>';
                echo '</table>';
@@ -64,7 +64,7 @@
                   echo '<p class="centrer">';
                   echo 'Les champs n\'ont pas été correctement saisis.';
                   echo '<br />';
-                  echo '<a href=commande.php>Retour au formulaire de commande</a>';
+                  echo '<a href=../commande.php>Retour au formulaire de commande</a>';
                   echo '</p>';
                }
             ?>

@@ -12,7 +12,7 @@
                <li><a href="http://localhost:8888/AuMarcheCouvert/suppression.php">Suppression</a></li>
             </ul>
          </div>
-         <div id="texte-administration">
+         <div id="texte">
             <!-- Pour éviter de crée des fichiers traitement-ajout-produit.php et traitement-ajout-restaurant.php, je l'apelle lui-même. -->
             <form method="POST" action="traitement-ajout.php">
                <?php
@@ -21,20 +21,23 @@
                      if ($_POST['ajout'] == "restaurant")
                      {
                         echo '<h2 class="centrer">Ajout d\'un restaurant</h2>';
+                        echo '<br />';
                         echo '<table>';
                         echo '<tr><td><label for="NomRestaurant">Nom du restaurant :</label></td><td><input type="text" name="NomRestaurant" id="NomRestaurant" /></td></tr>';
-                        echo '<tr><td><label for="Addr1Restaurant">Adresse du restaurant (facultatif) :</label></td><td><input type="text" name="Addr1Restaurant" id="Addr1Restaurant" /></td></tr>';
-                        echo '<tr><td><label for="Addr2Restaurant"></label></td><td><input type="text" name="Addr2Restaurant" id="Addr2Restaurant" /></td></tr>';
+                        echo '<tr><td><label for="Adr1Restaurant">Adresse du restaurant (facultatif) :</label></td><td><input type="text" name="Adr1Restaurant" id="Adr1Restaurant" /></td></tr>';
+                        echo '<tr><td><label for="Adr2Restaurant"></label></td><td><input type="text" name="Adr2Restaurant" id="Adr2Restaurant" /></td></tr>';
                         echo '<tr><td><label for="CpRestaurant">Code postal :</label></td><td><input type="text" name="CpRestaurant" id="CpRestaurant" /></td></tr>';
                         echo '<tr><td><label for="VilleRestaurant">Ville :</label></td><td><input type="text" name="VilleRestaurant" id="VilleRestaurant" /></td></tr>';
                         echo '<tr><td><label for="MelRestaurant">E-Mail (facultatif) :</label></td><td><input type="text" name="MelRestaurant" id="MelRestaurant" /></td></tr>';
                         echo '<tr><td><label for="TelRestaurant">Téléphone (facultatif) :</label></td><td><input type="text" name="TelRestaurant" id="TelRestaurant" /></td></tr>';
                         echo '</table>';
+                        echo '<br />';
                         echo '<center><input type="submit" value="Ajouter" /></center>';
                      }
                      elseif ($_POST['ajout'] == "produit")
                      {
                         echo '<h2 class="centrer">Ajout d\'un produit</h2>';
+                        echo '<br />';
                         echo '<table>';
                         echo '<tr><td><label for="DesignProduit">Nom du produit :</label></td><td><input type="text" name="DesignProduit" id="DesignProduit" /></td></tr>';
                         echo '<tr><td><label for="PrixProduit">Prix moyen constaté :</label></td><td><input type="text" name="PrixProduit" id="PrixProduit" /></td></tr>';
@@ -43,6 +46,7 @@
                         echo '<option value="unite">à l\'unité</option>';
                         echo '<option value="kilo">au kilo</option>';
                         echo '</select></td></tr></table>';
+                        echo '<br />';
                         echo '<center><input type="submit" value="Ajouter" /></center>';
                      }
                      else
@@ -72,7 +76,7 @@
                      else
                      {
                         // On apelle la procédure paramétrée P_AjoutRestaurant.
-                        P_AjoutRestaurant($_POST['NomRestaurant'],$_POST['Addr1Restaurant'],$_POST['Addr2Restaurant'],$_POST['CpRestaurant'],$_POST['VilleRestaurant'],$_POST['MelRestaurant'],$_POST['TelRestaurant']);
+                        P_AjoutRestaurant($_POST['NomRestaurant'],$_POST['Adr1Restaurant'],$_POST['Adr2Restaurant'],$_POST['CpRestaurant'],$_POST['VilleRestaurant'],$_POST['MelRestaurant'],$_POST['TelRestaurant']);
                         echo '<p class="centrer">';
                         echo 'Restaurant ajouté !';
                         echo '<br />';
