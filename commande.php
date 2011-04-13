@@ -22,7 +22,7 @@
                   // On affiche les noms des objRestaurants dans une liste déroulante.
                   while ($strTableauNomRestaurants = $objNomRestaurants->fetch())
                   {
-                     echo '<option value="' . $strTableauNomRestaurants['NomRestaurant'] . '">' . $strTableauNomRestaurants['NomRestaurant'] . '</option>';
+                     echo '<option value="'.htmlspecialchars($strTableauNomRestaurants['NomRestaurant']).'">'.htmlspecialchars($strTableauNomRestaurants['NomRestaurant']).'</option>';
                   }
                   $objNomRestaurants->closeCursor(); // Termine le traitement de la requête
                   echo '</select>';
@@ -52,7 +52,7 @@
                            // On affiche les noms des Restaurants dans une liste déroulante.
                            while ($strTableauProduits = $objProduits->fetch())
                            {
-                              echo '<option value="' . $strTableauProduits['DesignProduit'] . '">' . $strTableauProduits['DesignProduit'] . '</option>';
+                              echo '<option value="'.htmlspecialchars($strTableauProduits['DesignProduit']).'">'.htmlspecialchars($strTableauProduits['DesignProduit']).'</option>';
                            }
                            $objProduits->closeCursor(); // Termine le traitement de la requête
                            echo '</select>';
