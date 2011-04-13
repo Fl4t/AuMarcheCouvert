@@ -3,7 +3,7 @@
    session_start();
 
    // Chargement des fonctions.
-   include("traitement/fonctions.php");
+   include("/Users/fl4t/Sites/AuMarcheCouvert/traitement/fonctions.php");
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -16,7 +16,7 @@
       <!-- mon icon -->
       <link rel="shortcut-icon" href="favicon.ico">
       <!-- Renvoi vers un fichier séparé style.css -->
-      <link href="style.css" type="text/css" rel="stylesheet" media="screen">
+      <link href="http://localhost:8888/AuMarcheCouvert/style.css" type="text/css" rel="stylesheet" media="screen">
    </head>
    <body>
       <?php 
