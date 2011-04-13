@@ -91,15 +91,15 @@ function F_RefDuProduit($strNomProduit)
    return $intRefProduit['RefProduit'];
 }
 
-function P_AjoutRestaurant($NomRestaurant,$Adr1Restaurant,$Adr2Restaurant,$CpRestaurant,$VilleRestaurant,$MelRestaurant,$TelRestaurant)
+function P_AjoutRestaurant($NomRestaurant,$Addr1Restaurant,$Addr2Restaurant,$CpRestaurant,$VilleRestaurant,$MelRestaurant,$TelRestaurant)
 {
    global $objBDD; // On travaille sur la variable globale $objBDD.
    // Je fais les insertions à l'aide d'une requête préparée.
-   $objPreparation = $objBDD->prepare('INSERT INTO Restaurants VALUES(\'\',:NomRestaurant,:Adr1Restaurant,:Adr2Restaurant,:CpRestaurant,:VilleRestaurant,:MelRestaurant,:TelRestaurant)');
+   $objPreparation = $objBDD->prepare('INSERT INTO Restaurants VALUES(\'\',:NomRestaurant,:Addr1Restaurant,:Addr2Restaurant,:CpRestaurant,:VilleRestaurant,:MelRestaurant,:TelRestaurant)');
    $objPreparation->execute(array(
       'NomRestaurant' =>$NomRestaurant,
-      'Adr1Restaurant' =>$Adr1Restaurant,
-      'Adr2Restaurant' =>$Adr2Restaurant,
+      'Addr1Restaurant' =>$Addr1Restaurant,
+      'Addr2Restaurant' =>$Addr2Restaurant,
       'CpRestaurant' =>$CpRestaurant,
       'VilleRestaurant' =>$VilleRestaurant,
       'MelRestaurant' =>$MelRestaurant,
@@ -111,6 +111,52 @@ function P_AjoutProduit($DesignProduit,$PrixProduit,$UniteVente)
    global $objBDD; // On travaille sur la variable globale $objBDD.
    // Je fais les insertions à l'aide d'une requête préparée.
    $objPreparation = $objBDD->prepare('INSERT INTO Produits VALUES(\'\',:DesignProduit,:PrixProduit,:UniteVente)');
+   $objPreparation->execute(array(
+   'DesignProduit' =>$DesignProduit,
+   'PrixProduit' =>$PrixProduit,
+   'UniteVente' =>$UniteVente));
+}
+
+function F_ValeurDuRestaurant($strNomRestaurant)
+{
+   global $objBDD; // On travaille sur la variable globale $objBDD.
+   // Je fais les mise à jours à l'aide d'une requête préparée.
+   $objValeurDuRestaurant = $objBDD->query('SELECT * FROM Restaurants WHERE NomRestaurant = \''.$strNomRestaurant.'\'') or die(print_r($objBDD->errorInfo()));
+   $strValeurDuRestaurant = $objValeurDuRestaurant->fetch();
+   $objValeurDuRestaurant->closeCursor(); // Termine le traitement de la requête
+   return $strValeurDuRestaurant; // On retourne strValeurDuRestaurant
+}
+
+function F_ValeurDuProduit($strNomProduit)
+{
+   global $objBDD; // On travaille sur la variable globale $objBDD.
+   // Je fais les mise à jours à l'aide d'une requête préparée.
+   $objValeurDuProduit = $objBDD->query('SELECT * FROM Produits WHERE DesignProduit = \''.$strNomProduit.'\'') or die(print_r($objBDD->errorInfo()));
+   $strValeurDuProduit = $objValeurDuProduit->fetch();
+   $objValeurDuProduit->closeCursor(); // Termine le traitement de la requête
+   return $strValeurDuProduit; // On retourne strValeurDuProduit
+}
+
+function P_MAJRestaurant($NomRestaurant,$Addr1Restaurant,$Addr2Restaurant,$CpRestaurant,$VilleRestaurant,$MelRestaurant,$TelRestaurant)
+{
+   global $objBDD; // On travaille sur la variable globale $objBDD.
+   // Je fais les insertions à l'aide d'une requête préparée.
+   $objPreparation = $objBDD->prepare('UPDATE Restaurants SET NomRestaurant=:NomRestaurant, Addr1Restaurant=:Addr1Restaurant, Addr2Restaurant=:Addr2Restaurant, CpRestaurant=:CpRestaurant, VilleRestaurant=:VilleRestaurant, MelRestaurant=:MelRestaurant, TelRestaurant=:TelRestaurant WHERE NomRestaurant="'.$strNomRestaurant.'"');
+   $objPreparation->execute(array(
+      'NomRestaurant' =>$NomRestaurant,
+      'Addr1Restaurant' =>$Addr1Restaurant,
+      'Addr2Restaurant' =>$Addr2Restaurant,
+      'CpRestaurant' =>$CpRestaurant,
+      'VilleRestaurant' =>$VilleRestaurant,
+      'MelRestaurant' =>$MelRestaurant,
+      'TelRestaurant' =>$TelRestaurant));
+}
+
+function P_MAJProduit($DesignProduit,$PrixProduit,$UniteVente)
+{
+   global $objBDD; // On travaille sur la variable globale $objBDD.
+   // Je fais les insertions à l'aide d'une requête préparée.
+   $objPreparation = $objBDD->prepare('UPDATE Produits SET DesignProduit=:DesignProduit, PrixProduit=:PrixProduit, UniteVente=:UniteVente WHERE DesignProduit="'.$DesignProduit.'"');
    $objPreparation->execute(array(
    'DesignProduit' =>$DesignProduit,
    'PrixProduit' =>$PrixProduit,
