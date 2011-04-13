@@ -11,26 +11,22 @@
                Choisissez les produits ainsi que les quantités souhaités.<br />
             </p>
             <form method="post" action="traitement/traitement-commande.php">
-               <p> 
-                  <label for="listeRestaurant">Choisissez un restaurant : </label>
-                  <select name="listeRestaurant" id="listeRestaurant">
-                     <?php
-                        // On crée une ligne vide pour qu'il n'y est rien par defaut.
-                        echo '<option value="Vide" selected="selected"></option>';
-                        
-                        // On récupère les noms des objRestaurants, sinon il y aura une erreur explicite.
-                        $objNomRestaurants = $objBDD->query('SELECT NomRestaurant FROM restaurants') or die(print_r($objBDD->errorInfo()));
-                        
-                        // On affiche les noms des objRestaurants dans une liste déroulante.
-                        while ($strTableauNomRestaurants = $objNomRestaurants->fetch())
-                        {
-                           echo '<option value="' . $strTableauNomRestaurants['NomRestaurant'] . '">' . $strTableauNomRestaurants['NomRestaurant'] . '</option>';
-                        }
-                        $objNomRestaurants->closeCursor(); // Termine le traitement de la requête
-                     ?>
-                  </select>
-               </p> 
                <?php
+                  echo '<p>';
+                  echo '<label for="listeRestaurant">Choisissez un restaurant : </label>';
+                  echo '<select name="listeRestaurant" id="listeRestaurant">';
+                  // On crée une ligne vide pour qu'il n'y est rien par defaut.
+                  echo '<option value="Vide" selected="selected"></option>';
+                  // On récupère les noms des objRestaurants, sinon il y aura une erreur explicite.
+                  $objNomRestaurants = $objBDD->query('SELECT NomRestaurant FROM restaurants') or die(print_r($objBDD->errorInfo()));
+                  // On affiche les noms des objRestaurants dans une liste déroulante.
+                  while ($strTableauNomRestaurants = $objNomRestaurants->fetch())
+                  {
+                     echo '<option value="' . $strTableauNomRestaurants['NomRestaurant'] . '">' . $strTableauNomRestaurants['NomRestaurant'] . '</option>';
+                  }
+                  $objNomRestaurants->closeCursor(); // Termine le traitement de la requête
+                  echo '</select>';
+                  echo '</p>';
                   // Je boucle 5 fois pour crée 5 tableaux HTML identique.
                   for ($intCompteur=1;$intCompteur<=5;$intCompteur++)
                   {
@@ -51,10 +47,8 @@
                            echo '<select name="listeProduits' . $intCompteur . '" id="listeProduits' . $intCompteur .'">';
                            // On crée une ligne vide pour qu'il n'y est rien par defaut.
                            echo '<option value="Vide" selected="selected"></option>';
-                           
                            // On récupère la liste des produits, sinon il y aura une erreur explicite.
                            $objProduits = $objBDD->query('SELECT DesignProduit FROM Produits') or die(print_r($objBDD->errorInfo()));
-                           
                            // On affiche les noms des Restaurants dans une liste déroulante.
                            while ($strTableauProduits = $objProduits->fetch())
                            {
