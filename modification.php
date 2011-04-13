@@ -12,14 +12,17 @@
                <li><a href="suppression.php">Suppression</a></li>
             </ul>
          </div>
-         <div id="texte-administration">
+         <div id="question">
                <form method="post" action="traitement/traitement-modification.php">
-                  <p class="centrer">
-                     Que voulez-vous modifier ?<br />
+                  <p>
+                     Que voulez-vous modifier ?
+                     <br />
+                     <br />
                      <input type="radio" name="modification" value="restaurant" id="restaurant" /><label for="restaurant">un restaurant</label><br />
                      <input type="radio" name="modification" value="produit" id="produit" /><label for="produit">un produit</label>
                      <br />
-                     <input type="submit" value="Continuer" /></center>
+                     <br />
+                     <input type="submit" value="Continuer" />
                   </p>
                </form>
          </div>
