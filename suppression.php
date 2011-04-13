@@ -14,7 +14,7 @@
          </div>
          <div id="texte-administration">
                <form method="post" action="traitement/traitement-suppression.php">
-                  <p>
+                  <p class="centrer">
                      Que voulez-vous supprimer ?<br />
                      <input type="radio" name="ajout" value="restaurant" id="restaurant" /><label for="restaurant">un restaurant</label><br />
                      <input type="radio" name="ajout" value="produit" id="produit" /><label for="produit">un produit</label>
