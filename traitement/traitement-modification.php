@@ -115,7 +115,9 @@
                //
                elseif (isset($_POST['NomRestaurant']))
                {
-                 P_MAJRestaurant($_SESSION['SauvegardeNomRestaurants'], $_POST['NomRestaurant'],$_POST['Adr1Restaurant'],$_POST['Adr2Restaurant'],$_POST['CpRestaurant'],$_POST['VilleRestaurant'],$_POST['MelRestaurant'],$_POST['TelRestaurant']);
+                  P_MAJRestaurant(stripslashes($_SESSION['SauvegardeNomRestaurants']), stripslashes($_POST['NomRestaurant']), stripslashes($_POST['Adr1Restaurant']), stripslashes($_POST['Adr2Restaurant']), stripslashes($_POST['CpRestaurant']), stripslashes($_POST['VilleRestaurant']), stripslashes($_POST['MelRestaurant']),stripslashes($_POST['TelRestaurant']));
+                  // detruit la session car j'en ai pas besoin plus longtemps
+                  session_destroy();
                   echo '<p class="centrer">';
                   echo 'Modification du restaurant reussi !';
                   echo '<br />';
@@ -124,7 +126,9 @@
                }
                elseif (isset($_POST['DesignProduit']))
                {
-                  P_MAJProduit($_SESSION['SauvegardeNomProduits'], $_POST['DesignProduit'],$_POST['PrixProduit'],$_POST['UniteVente']);
+                  P_MAJProduit(stripslashes($_SESSION['SauvegardeNomProduits']), stripslashes($_POST['DesignProduit']), stripslashes($_POST['PrixProduit']), stripslashes($_POST['UniteVente']));
+                  // detruit la session car j'en ai pas besoin plus longtemps
+                  session_destroy();
                   echo '<p class="centrer">';
                   echo 'Modification du produit reussi !';
                   echo '<br />';
