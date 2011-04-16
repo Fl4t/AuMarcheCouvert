@@ -33,13 +33,11 @@
                ?>
                <table>
                   <tr>
-                     <td class="equilibrage" rowspan="2"></td>
                      <?php
                         echo '<td><label for="listeProduits' . $intCompteur . '">Choisissez un produit :</label></td>';
                         echo '<td><label for="QuantiteProduit' . $intCompteur . '">Quantité souhaité :</label></td>';
                         echo '<td><label for="PrixDuJour' . $intCompteur . '">Prix du jour :</label></td>';
                      ?>
-                     <td class="equilibrage" rowspan="2"></td>
                   </tr>
                   <tr>
                      <td>
@@ -61,7 +59,7 @@
                      <!-- On demande la quantité et le prix du jour -->
                      <?php
                         echo '<td><input type="text" name="QuantiteProduit' . $intCompteur . '" id="QuantiteProduit' . $intCompteur . '" /></td>';
-                        echo '<td><input type="text" name="PrixDuJour' . $intCompteur . '" id="PrixDuJour' . $intCompteur . '" /></td>';
+                        echo '<td><input type="text" name="PrixDuJour' . $intCompteur . '" id="PrixDuJour' . $intCompteur . '" /> €</td>';
                      ?>   
                   </tr>
                </table>
