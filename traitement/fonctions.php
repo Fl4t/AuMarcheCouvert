@@ -109,7 +109,8 @@ function F_RefDuProduit($strNomProduit)
    {
       global $objBDD; // On travaille sur la variable globale $objBDD.
       // On va chercher la référence du produits
-      $objRefProduit = $objBDD->query('SELECT RefProduit FROM Produits WHERE DesignProduit = \''.$strNomProduit.'\'');
+      $objRefProduit = $objBDD->prepare('SELECT RefProduit FROM Produits WHERE DesignProduit=:DesignProduit');
+      $objRefProduit->execute(array('DesignProduit' => $strNomProduit));
       $intRefProduit = $objRefProduit->fetch();
       $objRefProduit->closeCursor();
       return $intRefProduit['RefProduit'];
@@ -266,10 +267,11 @@ function P_MAJProduit($SauvegardeNomProduits,$DesignProduit,$PrixProduit,$UniteV
    { 
       global $objBDD; // On travaille sur la variable globale $objBDD.
       // Je fais les insertions à l'aide d'une requête préparée.
-      $objPreparation = $objBDD->prepare('UPDATE Produits SET DesignProduit=:DesignProduit, PrixProduit=:PrixProduit, UniteVente=:UniteVente WHERE DesignProduit="'.$SauvegardeNomProduits.'"');
+      $objPreparation = $objBDD->prepare('UPDATE Produits SET DesignProduit=:DesignProduit, PrixProduit=:PrixProduit, UniteVente=:UniteVente WHERE DesignProduit=:SauvegardeNomProduits');
       $objPreparation->execute(array(
       'DesignProduit' => $DesignProduit,
       'PrixProduit' => $PrixProduit,
+      'SauvegardeNomProduits' => $SauvegardeNomProduits,
       'UniteVente' => $UniteVente));
    }
    catch(Exception $e)

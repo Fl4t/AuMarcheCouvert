@@ -27,7 +27,7 @@
                      // On crée une ligne vide pour qu'il n'y est rien par defaut.
                      echo '<option value="Vide" selected="selected"></option>';
                      // On récupère les noms des objRestaurants, sinon il y aura une erreur explicite.
-                     $objNomRestaurants = $objBDD->query('SELECT NomRestaurant FROM restaurants') or die(print_r($objBDD->errorInfo()));
+                     $objNomRestaurants = $objBDD->query('SELECT NomRestaurant FROM restaurants ORDER BY NomRestaurant') or die(print_r($objBDD->errorInfo()));
                      // On affiche les noms des objRestaurants dans une liste déroulante.
                      while ($strTableauNomRestaurants = $objNomRestaurants->fetch())
                      {
@@ -46,7 +46,7 @@
                      // On crée une ligne vide pour qu'il n'y est rien par defaut.
                      echo '<option value="Vide" selected="selected"></option>';
                      // On récupère la liste des produits, sinon il y aura une erreur explicite.
-                     $objProduits = $objBDD->query('SELECT DesignProduit FROM Produits') or die(print_r($objBDD->errorInfo()));
+                     $objProduits = $objBDD->query('SELECT DesignProduit FROM Produits ORDER BY DesignProduit') or die(print_r($objBDD->errorInfo()));
                      // On affiche les noms des Restaurants dans une liste déroulante.
                      while ($strTableauProduits = $objProduits->fetch())
                      {
