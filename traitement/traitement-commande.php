@@ -1,7 +1,8 @@
                <?php include("../header.php");?>
-               <li><a href="index.php">Acceuil</a></li>
-               <li class="actif"><a href="commande.php">Nouvelle Commande</a></li>
-               <li><a href="consultation.php">Consultation</a></li>
+               <li><a href="http://localhost:8888/AuMarcheCouvert/index.php">Accueil</a></li>
+               <li class="actif"><a href="http://localhost:8888/AuMarcheCouvert/commande.php">Nouvelle Commande</a></li>
+               <li><a href="http://localhost:8888/AuMarcheCouvert/consultation.php">Consultation</a></li>
+               <li><a href="http://localhost:8888/AuMarcheCouvert/administration.php">Administration</a></li>
             </ul>
          </nav>
          <div id="texte">
@@ -17,8 +18,9 @@
                $intNombreDeProduits = $_SESSION['NombreDeProduits'];             
                if ($intNombreDeProduits != 0) 
                {
-                  echo '<table>';
+                  $fltTotalHT = 0;
                   echo '<h3><strong>'.htmlspecialchars($_SESSION['NomRestaurant']).'</strong></h3>';
+                  echo '<table>';
                   echo '<thead>';
                   echo '<tr>';
                   echo '<td class="recapitulatif">Produits :</td>';
@@ -29,20 +31,22 @@
                   echo '</thead>';
                   echo '<tbody>';
                   // On affiche le panier.
-                  for($intAffichage=1;$intAffichage <= $intNombreDeProduits -1;$intAffichage++)
+                  for($intAffichage=1;$intAffichage<=$intNombreDeProduits;$intAffichage++)
                   {
                      echo '<tr>';
-                     echo '<td class="recapitulatif">'.htmlspecialchars($_SESSION['Panier']['DesignProduit'][$intAffichage]).'</td>';
-                     echo '<td class="recapitulatif">'.htmlspecialchars($_SESSION['Panier']['QuantiteProduit'][$intAffichage]) . '</td>';
-                     echo '<td class="recapitulatif">'.htmlspecialchars($_SESSION['Panier']['PrixDuJour'][$intAffichage]).'</td>';
-                     echo '<td class="recapitulatif">'.htmlspecialchars($_SESSION['Panier']['PrixDuJour'][$intAffichage])*htmlspecialchars($_SESSION['Panier']['QuantiteProduit'][$intAffichage]).'</td>';
+                     echo '<td class="recapitulatif">'.stripslashes(htmlspecialchars($_SESSION['Panier']['DesignProduit'][$intAffichage])).'</td>';
+                     echo '<td class="recapitulatif">'.htmlspecialchars($_SESSION['Panier']['QuantiteProduit'][$intAffichage]).'</td>';
+                     echo '<td class="recapitulatif">'.htmlspecialchars($_SESSION['Panier']['PrixDuJour'][$intAffichage]).' €</td>';
+                     echo '<td class="recapitulatif">'.htmlspecialchars($_SESSION['Panier']['PrixDuJour'][$intAffichage])*htmlspecialchars($_SESSION['Panier']['QuantiteProduit'][$intAffichage]).' €</td>';
                      echo '</tr>';
+                     // Calcul du Prix Total
+                     $fltTotalHT += htmlspecialchars($_SESSION['Panier']['PrixDuJour'][$intAffichage])*htmlspecialchars($_SESSION['Panier']['QuantiteProduit'][$intAffichage]);
                   }
-               echo '<tr>'; // on affiche le dernier séparement pour ne pas avoir de border-bottom.
-               echo '<td class="centrer">'.htmlspecialchars($_SESSION['Panier']['DesignProduit'][$intNombreDeProduits]).'</td>';
-               echo '<td class="centrer">'.htmlspecialchars($_SESSION['Panier']['QuantiteProduit'][$intNombreDeProduits]).'</td>';
-               echo '<td class="centrer">'.htmlspecialchars($_SESSION['Panier']['PrixDuJour'][$intNombreDeProduits]).'</td>';
-               echo '<td class="centrer">'.htmlspecialchars($_SESSION['Panier']['PrixDuJour'][$intNombreDeProduits])*htmlspecialchars($_SESSION['Panier']['QuantiteProduit'][$intNombreDeProduits]).'</td>';
+               echo '<tr>'; // on affiche le prix total HT.
+               echo '<td></td>';
+               echo '<td></td>';
+               echo '<td class="centrer"><b>Prix Total :</b></td>';
+               echo '<td class="centrer">'.$fltTotalHT.' €</td>';
                echo '</tr>';
                echo '</tbody>';
                echo '</table>';
