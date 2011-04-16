@@ -1,22 +1,13 @@
 <?php
 //////////////////////////////////////////////
 //                                          //
-//               constantes                 //
-//                                          //
-//////////////////////////////////////////////
-
-// Constante TVA
-define('intTVA',1.055);
-
-//////////////////////////////////////////////
-//                                          //
 //                fonctions                 //
 //                                          //
 //////////////////////////////////////////////
 
-// Fonction ConnexionBDD
+//
 // On se connecte sur la base de donnée en passant par un essai
-// affiche une erreur explicite.
+//
 function F_ConnexionBDD()
 {
    try
@@ -30,36 +21,34 @@ function F_ConnexionBDD()
    }
 }
 
-// Fonction TransfertPostSession
+//
 // On affecte toutes les valeurs de la superglobale $_POST à $_SESSION si ils sont valide. 
+// 
 function P_TransfertPostDansSession()
 {
+   // On detruit la session pour effacer les valeurs précédentes éventuelles. 
+   session_destroy();
    // Si le restaurant a été renseigné, on continue.
    if ($_POST['listeRestaurant'] != "Vide")
    {
-      $_SESSION['NomRestaurant'] = $_POST['listeRestaurant'];
+      $_SESSION['NomRestaurant'] = stripslashes($_POST['listeRestaurant']);
       // On crée un compteur pour ajouter à la suite du tableau.
       $intCompteurAjout = 0;
       for($NombreDeProduits=1;$NombreDeProduits<=5;$NombreDeProduits++)
       {
-         // Si le produit a été séléctionné et qu'une quantité a été tapé et qu'elle est supérieur à 1.
+         // Si un produit a été séléctionné.
          if ($_POST['listeProduits' . $NombreDeProduits] != "Vide")
          {
-            if (empty($_POST['QuantiteProduit'.$NombreDeProduits]) || empty($_POST['PrixDuJour'.$NombreDeProduits]))
+            // Si la quantité et le prix ne sont pas vide et ne sont pas égal à zero 
+            // ("", NULL, 0 est interpreté comme vide pour empty, voila pourquoi je teste pas la valeur 0)
+            if (!empty($_POST['QuantiteProduit'.$NombreDeProduits]) && !empty($_POST['PrixDuJour'.$NombreDeProduits]))
             {
-            }
-            else
-            {
-               // On incrémente le compteur quand les conditions sont vraies.
                $intCompteurAjout += 1;
-               // On remplie le tableau 'DesignProduit' qui ce trouve lui même dans le tabeau à l'index 0 de 'Panier'
                $_SESSION['Panier']['DesignProduit'][$intCompteurAjout] = $_POST['listeProduits' . $NombreDeProduits];
-               // On remplie le tableau 'QuantiteProduit' qui ce trouve lui même dans le tabeau à l'index 1 de 'Panier'
                // On force tout ce qui a pu être tapé en entier, si c'était autre chose qu'un entier, ça vaudra 0 
-               $_SESSION['Panier']['QuantiteProduit'][$intCompteurAjout] = (integer) $_POST['QuantiteProduit' . $NombreDeProduits];
-               // On ajoute le prix du produit via la fonction PrixDuProduit.
+               $_SESSION['Panier']['QuantiteProduit'][$intCompteurAjout] = (float) preg_replace('#,#','.',$_POST['QuantiteProduit' . $NombreDeProduits]);
                // J'utilise une expréssion régulière au cas ou une virgule est utilisé, les décimaux php n'accepte que le point.
-               $_SESSION['Panier']['PrixDuJour'][$intCompteurAjout] = preg_replace('#,#','.',$_POST['PrixDuJour'.$NombreDeProduits]);
+               $_SESSION['Panier']['PrixDuJour'][$intCompteurAjout] = (float) preg_replace('#,#','.',$_POST['PrixDuJour'.$NombreDeProduits]);
             }
          }
       }
@@ -71,104 +60,256 @@ function P_TransfertPostDansSession()
    //print_r($_SESSION);
    //echo '</pre>';
 }
+
+//
+// Recupère le code du restaurant a partir du nom du restaurant fourni en parramètre.
+// 
 function F_CodeDuRestaurant($strNomRestaurant)
 {
    global $objBDD; // On travaille sur la variable globale $objBDD.
-   // On recupère le code du restaurant qui passe commande.
-   $objCodeRestaurant = $objBDD->query('SELECT CodeRestaurant FROM Restaurants WHERE NomRestaurant = \''.$strNomRestaurant.'\'') or die(print_r($objBDD->errorInfo()));
-   $strCodeRestaurant = $objCodeRestaurant->fetch();
-   $objCodeRestaurant->closeCursor(); // Termine le traitement de la requête
-   return $strCodeRestaurant['CodeRestaurant']; // On retourne la valeur du champ CodeRestaurant
+   try
+   {
+      // On recupère le code du restaurant qui passe commande.
+      $objCodeRestaurant = $objBDD->prepare('SELECT CodeRestaurant FROM Restaurants WHERE NomRestaurant=:NomRestaurant');
+      $objCodeRestaurant->execute(array('NomRestaurant' => $strNomRestaurant));
+      $strCodeRestaurant = $objCodeRestaurant->fetch();
+      $objCodeRestaurant->closeCursor(); // Termine le traitement de la requête
+      return $strCodeRestaurant['CodeRestaurant']; // On retourne la valeur du champ CodeRestaurant
+   }
+   catch(Exception $e)
+   {
+      die('Erreur F_CodeDuRestaurant : ' . $e->getMessage());
+   }
 }
 
+//
+// Création du nouvelle commande
+//
+function P_CreationCommande($intCodeRestaurant)
+{
+   try
+   {
+      global $objBDD; // On travaille sur la variable globale $objBDD.
+      // On ajoute une entrée dans la table commande.
+      // Pas utile de préparer ici car intCodeRestaurant provient de la base de donnée qui a générer le code tout seul.
+      $objBDD->exec('INSERT INTO Commandes(NumCommande, CodeRestaurant, DateCommande) VALUES(\'\','.$intCodeRestaurant.',NOW())');
+   }
+   catch(Exception $e)
+   {
+      die('Erreur P_CreationCommande : ' . $e->getMessage());
+   }
+}
+
+//
+// Connaitre la référence d'un produit via son nom
+//
 function F_RefDuProduit($strNomProduit)
 {
-   global $objBDD; // On travaille sur la variable globale $objBDD.
-   // On va chercher la référence du produits
-   $objRefProduit = $objBDD->query('SELECT RefProduit FROM Produits WHERE DesignProduit = \''.$strNomProduit.'\'') or die(print_r($objBDD->errorInfo()));
-   $intRefProduit = $objRefProduit->fetch();
-   $objRefProduit->closeCursor();
-   return $intRefProduit['RefProduit'];
+   try
+   {
+      global $objBDD; // On travaille sur la variable globale $objBDD.
+      // On va chercher la référence du produits
+      $objRefProduit = $objBDD->query('SELECT RefProduit FROM Produits WHERE DesignProduit = \''.$strNomProduit.'\'');
+      $intRefProduit = $objRefProduit->fetch();
+      $objRefProduit->closeCursor();
+      return $intRefProduit['RefProduit'];
+   }
+   catch(Exception $e)
+   {
+      die('Erreur F_RefDuProduit : ' . $e->getMessage());
+   }
 }
 
+//
+// Ajout des lignes dans Contenir correspondant a une commande.
+//
+function P_AjoutDesProduits($RefProduit,$intDerniereID,$QteCommande,$PrixDuJour)
+{
+   try
+   {
+      global $objBDD; // On travaille sur la variable globale $objBDD.
+      // Je fais les insertions à l'aide d'une requête préparée.
+      $objPreparation = $objBDD->prepare('INSERT INTO Contenir(RefProduit, NumCommande, QteCommande, PrixDuJour) VALUES(:RefProduit, :NumCommande, :QteCommande, :PrixDuJour)');
+      $objPreparation->execute(array(
+      'RefProduit' => $RefProduit, 
+      'NumCommande' => $intDerniereID,
+      'QteCommande' => $QteCommande,
+      'PrixDuJour' => $PrixDuJour));
+   }
+   catch(Exception $e)
+   {
+      die('Erreur P_AjoutDesProduits : ' . $e->getMessage());
+   }
+}
+
+//
+// Fonction d'ajout d'un nouveau restaurant
+// 
 function P_AjoutRestaurant($NomRestaurant,$Adr1Restaurant,$Adr2Restaurant,$CpRestaurant,$VilleRestaurant,$MelRestaurant,$TelRestaurant)
 {
-   global $objBDD; // On travaille sur la variable globale $objBDD.
-   // Je fais les insertions à l'aide d'une requête préparée.
-   $objPreparation = $objBDD->prepare('INSERT INTO Restaurants VALUES(\'\',:NomRestaurant,:Adr1Restaurant,:Adr2Restaurant,:CpRestaurant,:VilleRestaurant,:MelRestaurant,:TelRestaurant)');
-   $objPreparation->execute(array(
-   'NomRestaurant' => $NomRestaurant,
-   'Adr1Restaurant' => $Adr1Restaurant,
-   'Adr2Restaurant' => $Adr2Restaurant,
-   'CpRestaurant' => $CpRestaurant,
-   'VilleRestaurant' => $VilleRestaurant,
-   'MelRestaurant' => $MelRestaurant,
-   'TelRestaurant' => $TelRestaurant));
+   try
+   {
+      global $objBDD; // On travaille sur la variable globale $objBDD.
+      // Je fais les insertions à l'aide d'une requête préparée.
+      $objPreparation = $objBDD->prepare('INSERT INTO Restaurants VALUES(\'\',:NomRestaurant,:Adr1Restaurant,:Adr2Restaurant,:CpRestaurant,:VilleRestaurant,:MelRestaurant,:TelRestaurant)');
+      $objPreparation->execute(array(
+      'NomRestaurant' => $NomRestaurant,
+      'Adr1Restaurant' => $Adr1Restaurant,
+      'Adr2Restaurant' => $Adr2Restaurant,
+      'CpRestaurant' => $CpRestaurant,
+      'VilleRestaurant' => $VilleRestaurant,
+      'MelRestaurant' => $MelRestaurant,
+      'TelRestaurant' => $TelRestaurant));
+   }
+   catch(Exception $e)
+   {
+      die('Erreur P_AjoutRestaurant : ' . $e->getMessage());
+   }
 }
 
+//
+// Ajout de nouveau produit
+//
 function P_AjoutProduit($DesignProduit,$PrixProduit,$UniteVente)
 {
-   global $objBDD; // On travaille sur la variable globale $objBDD.
-   // Je fais les insertions à l'aide d'une requête préparée.
-   $objPreparation = $objBDD->prepare('INSERT INTO Produits VALUES(\'\',:DesignProduit,:PrixProduit,:UniteVente)');
-   $objPreparation->execute(array(
-   'DesignProduit' => $DesignProduit,
-   'PrixProduit' => $PrixProduit,
-   'UniteVente' => $UniteVente));
+   try
+   {
+      global $objBDD; // On travaille sur la variable globale $objBDD.
+      // Je fais les insertions à l'aide d'une requête préparée.
+      $objPreparation = $objBDD->prepare('INSERT INTO Produits VALUES(\'\',:DesignProduit,:PrixProduit,:UniteVente)');
+      $objPreparation->execute(array(
+      'DesignProduit' => $DesignProduit,
+      'PrixProduit' => $PrixProduit,
+      'UniteVente' => $UniteVente));
+   }
+   catch(Exception $e)
+   {
+      die('Erreur P_AjoutProduit : ' . $e->getMessage());
+   }
 }
 
+//
+// Donne les informations d'un restaurant graçe a son nom
+// Utiliser dans la modification d'un restaurant
+//
 function F_ValeurDuRestaurant($strNomRestaurant)
 {
-   global $objBDD; // On travaille sur la variable globale $objBDD.
-   // Je fais les mise à jours à l'aide d'une requête préparée.
-   $objValeurDuRestaurant = $objBDD->query('SELECT * FROM Restaurants WHERE NomRestaurant = \''.$strNomRestaurant.'\'') or die(print_r($objBDD->errorInfo()));
-   $strValeurDuRestaurant = $objValeurDuRestaurant->fetch();
-   $objValeurDuRestaurant->closeCursor(); // Termine le traitement de la requête
-   return $strValeurDuRestaurant; // On retourne strValeurDuRestaurant
+   try
+   {
+      global $objBDD; // On travaille sur la variable globale $objBDD.
+      // Je fais les mise à jours à l'aide d'une requête préparée.
+      $objValeurDuRestaurant = $objBDD->prepare('SELECT * FROM Restaurants WHERE NomRestaurant=:NomRestaurant');
+      $objValeurDuRestaurant->execute(array('NomRestaurant' => $strNomRestaurant));
+      $strValeurDuRestaurant = $objValeurDuRestaurant->fetch();
+      $objValeurDuRestaurant->closeCursor(); // Termine le traitement de la requête
+      return $strValeurDuRestaurant; // On retourne strValeurDuRestaurant
+   }
+   catch(Exception $e)
+   {
+      die('Erreur F_ValeurDuRestaurant : ' . $e->getMessage());
+   }
 }
 
+//
+// Donne les informations d'un produit graçe a son nom
+// Utiliser dans la modification d'un produit 
+//
 function F_ValeurDuProduit($strNomProduit)
 {
-   global $objBDD; // On travaille sur la variable globale $objBDD.
-   // Je fais les mise à jours à l'aide d'une requête préparée.
-   $objValeurDuProduit = $objBDD->query('SELECT * FROM Produits WHERE DesignProduit = \''.$strNomProduit.'\'') or die(print_r($objBDD->errorInfo()));
-   $strValeurDuProduit = $objValeurDuProduit->fetch();
-   $objValeurDuProduit->closeCursor(); // Termine le traitement de la requête
-   return $strValeurDuProduit; // On retourne strValeurDuProduit
+   try
+   {
+      global $objBDD; // On travaille sur la variable globale $objBDD.
+      // Je fais les mise à jours à l'aide d'une requête préparée.
+      $objValeurDuProduit = $objBDD->prepare('SELECT * FROM Produits WHERE DesignProduit=:NomProduit');
+      $objValeurDuProduit->execute(array('NomProduit' => $strNomProduit));
+      $strValeurDuProduit = $objValeurDuProduit->fetch();
+      $objValeurDuProduit->closeCursor(); // Termine le traitement de la requête
+      return $strValeurDuProduit; // On retourne strValeurDuProduit
+   }
+   catch(Exception $e)
+   {
+      die('Erreur F_ValeurDuProduit : ' . $e->getMessage());
+   }
 }
 
+//
+// Mise a jour du restaurant actuellement modifié
+//
 function P_MAJRestaurant($SauvegardeNomRestaurant,$NomRestaurant,$Adr1Restaurant,$Adr2Restaurant,$CpRestaurant,$VilleRestaurant,$MelRestaurant,$TelRestaurant)
 {
-   global $objBDD; // On travaille sur la variable globale $objBDD.
-   // Je fais les insertions à l'aide d'une requête préparée.
-   $objPreparation = $objBDD->prepare('UPDATE Restaurants SET NomRestaurant=:NomRestaurant, Adr1Restaurant=:Adr1Restaurant, Adr2Restaurant=:Adr2Restaurant, CpRestaurant=:CpRestaurant, VilleRestaurant=:VilleRestaurant, MelRestaurant=:MelRestaurant, TelRestaurant=:TelRestaurant WHERE NomRestaurant="'.$SauvegardeNomRestaurant.'"');
-   $objPreparation->execute(array(
-   'NomRestaurant' => $NomRestaurant,
-   'Adr1Restaurant' => $Adr1Restaurant,
-   'Adr2Restaurant' => $Adr2Restaurant,
-   'CpRestaurant' => $CpRestaurant,
-   'VilleRestaurant' => $VilleRestaurant,
-   'MelRestaurant' => $MelRestaurant,
-   'TelRestaurant' => $TelRestaurant));
+   try
+   {
+      global $objBDD; // On travaille sur la variable globale $objBDD.
+      // Je fais les insertions à l'aide d'une requête préparée.
+      $objPreparation = $objBDD->prepare('UPDATE Restaurants SET NomRestaurant=:NomRestaurant, Adr1Restaurant=:Adr1Restaurant, Adr2Restaurant=:Adr2Restaurant, CpRestaurant=:CpRestaurant, VilleRestaurant=:VilleRestaurant, MelRestaurant=:MelRestaurant, TelRestaurant=:TelRestaurant WHERE NomRestaurant="'.$SauvegardeNomRestaurant.'"');
+      $objPreparation->execute(array(
+      'NomRestaurant' => $NomRestaurant,
+      'Adr1Restaurant' => $Adr1Restaurant,
+      'Adr2Restaurant' => $Adr2Restaurant,
+      'CpRestaurant' => $CpRestaurant,
+      'VilleRestaurant' => $VilleRestaurant,
+      'MelRestaurant' => $MelRestaurant,
+      'TelRestaurant' => $TelRestaurant));
+   }
+   catch(Exception $e)
+   {
+      die('Erreur P_MAJRestaurant : ' . $e->getMessage());
+   }
 }
 
+//
+// Mise a jour du produit actuellement modifié
+//
 function P_MAJProduit($SauvegardeNomProduits,$DesignProduit,$PrixProduit,$UniteVente)
 {
-   global $objBDD; // On travaille sur la variable globale $objBDD.
-   // Je fais les insertions à l'aide d'une requête préparée.
-   $objPreparation = $objBDD->prepare('UPDATE Produits SET DesignProduit=:DesignProduit, PrixProduit=:PrixProduit, UniteVente=:UniteVente WHERE DesignProduit="'.$SauvegardeNomProduits.'"');
-   $objPreparation->execute(array(
-   'DesignProduit' => $DesignProduit,
-   'PrixProduit' => $PrixProduit,
-   'UniteVente' => $UniteVente));
+   try
+   { 
+      global $objBDD; // On travaille sur la variable globale $objBDD.
+      // Je fais les insertions à l'aide d'une requête préparée.
+      $objPreparation = $objBDD->prepare('UPDATE Produits SET DesignProduit=:DesignProduit, PrixProduit=:PrixProduit, UniteVente=:UniteVente WHERE DesignProduit="'.$SauvegardeNomProduits.'"');
+      $objPreparation->execute(array(
+      'DesignProduit' => $DesignProduit,
+      'PrixProduit' => $PrixProduit,
+      'UniteVente' => $UniteVente));
+   }
+   catch(Exception $e)
+   {
+      die('Erreur P_MAJProduit : ' . $e->getMessage());
+   }
 }
-//function LectureBDD($strRequete)
-//{
-   //global $objBDD; // On travaille sur la variable globale $objBDD.
-   //// On va chercher le prix du produits contenu en paramètre
-   //$objValeurRecolter = $objBDD->query($strRequete) or die(print_r($objBDD->errorInfo()));
-   //$tableauValeurRecolter = $objPrixProduits->fetch();
-   //$objValeurRecolter->closeCursor();
-   //return $tableauValeurRecolter; // On retourne la valeur du champ PrixProduit
-/*}*/
+
+//
+// Suppression pur et simple du restaurant graçe a son nom
+//
+function P_SuppressionRestaurant($NomRestaurant)
+{
+   try
+   {
+      global $objBDD; // On travaille sur la variable globale $objBDD.
+      $objPreparation = $objBDD->prepare('DELETE FROM Restaurants WHERE NomRestaurant=:NomRestaurant');
+      $objPreparation->execute(array(
+      'NomRestaurant' => $NomRestaurant));
+   }
+   catch(Exception $e)
+   {
+      die('Erreur P_SuppressionRestaurant : ' . $e->getMessage());
+   }
+}
+
+//
+// Suppression pur et simple du Produit graçe a son nom
+//
+function P_SuppressionProduit($DesignProduit)
+{
+   try
+   {
+      global $objBDD; // On travaille sur la variable globale $objBDD.
+      $objSuppressionProduit = $objBDD->prepare('DELETE FROM Produits WHERE DesignProduit=:DesignProduit');
+      $objSuppressionProduit->execute(array('DesignProduit' => $DesignProduit));
+   }
+   catch(Exception $e)
+   {
+      die('Erreur P_SuppressionProduit : ' . $e->getMessage());
+   }
+}
 ?>
