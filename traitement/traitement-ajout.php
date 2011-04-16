@@ -13,7 +13,8 @@
             </ul>
          </div>
          <div id="texte">
-            <!-- Pour éviter de crée des fichiers traitement-ajout-produit.php et traitement-ajout-restaurant.php, je l'apelle lui-même. -->
+            <!-- Pour éviter de crée des fichiers traitement-ajout-produit.php et traitement-ajout-restaurant.php, je l'apelle lui-même
+            à chaque étape du traitement. -->
             <form method="POST" action="traitement-ajout.php">
                <?php
                   if (isset($_POST['ajout']))
@@ -76,7 +77,7 @@
                      else
                      {
                         // On apelle la procédure paramétrée P_AjoutRestaurant.
-                        P_AjoutRestaurant($_POST['NomRestaurant'],$_POST['Adr1Restaurant'],$_POST['Adr2Restaurant'],$_POST['CpRestaurant'],$_POST['VilleRestaurant'],$_POST['MelRestaurant'],$_POST['TelRestaurant']);
+                        P_AjoutRestaurant(stripslashes($_POST['NomRestaurant']),stripslashes($_POST['Adr1Restaurant']),stripslashes($_POST['Adr2Restaurant']),stripslashes($_POST['CpRestaurant']),stripslashes($_POST['VilleRestaurant']),stripslashes($_POST['MelRestaurant']),stripslashes($_POST['TelRestaurant']));
                         echo '<p class="centrer">';
                         echo 'Restaurant ajouté !';
                         echo '<br />';
@@ -99,7 +100,7 @@
                         // On apelle la procédure paramétrée P_AjoutProduit.
                         // On gère le cas ou une virgule est insérée.
                         $_POST['PrixProduit'] = preg_replace('#,#','.',$_POST['PrixProduit']);
-                        P_AjoutProduit($_POST['DesignProduit'],$_POST['PrixProduit'],$_POST['UniteVente']);
+                        P_AjoutProduit(stripslashes($_POST['DesignProduit']),stripslashes($_POST['PrixProduit']),stripslashes($_POST['UniteVente']));
                         echo '<p class="centrer">';
                         echo 'Produit ajouté !';
                         echo '<br />';
