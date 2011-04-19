@@ -1,23 +1,27 @@
                <?php include("header.php");?>
                <li class="actif"><a href="index.php">Accueil</a></li>
-               <li><a href="commande.php">Nouvelle Commande</a></li>
+               <li><a href="commande.php">Nouvelle commande</a></li>
                <li><a href="consultation.php">Consultation</a></li>
                <li><a href="administration.php">Administration</a></li>
             </ul>
          </nav>
          <div id="texte">
             <p>
-               Le but de l'application est de remplir un formulaire qui permets de s'affranchir 
-               de l'écriture des bons de commandes des restaurants. Ceux-ci passe commande le plus souvent par téléphone.
+               Le but de l'application est de remplir les commandes prises par les restaurants lors de leurs achat.
+               Ceux-ci passe commande le plus souvent par téléphone.
             </p>
             <blockquote>
-               <h2>Commande</h2>
+               <h2>Nouvelle Commande</h2>
                <p>
-                  <strong>Commande</strong> permet d'enregistrer une commande pour un restaurant puis imprimer le bon de commande.
+                  <strong>Nouvelle commande</strong> permet d'enregistrer une commande pour un restaurant.
                </p>
-               <h2>Impression mensuelle</h2> 
+               <h2>Consultation</h2> 
                <p>
-                  <strong>Impression mensuelle</strong> sert à sortir la facture mensuelle d'un restaurant défini. Celle-ci comprend la somme des commandes du-dit restaurant prise durant le mois.
+                  <strong>Consultation</strong> est un onglet qui permet de vérifier différentes informations de la base de donnée comme les anciennes commandes, le recapitulatif mensuel des restaurants...
+               </p>
+               <h2>Administration</h2>
+               <p>
+                  <strong>Administration</strong> sert de formulaire d'ajout, de modification ou de suppression de produit ou de restaurant.
                </p>
             </blockquote>
          </div>

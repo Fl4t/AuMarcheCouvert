@@ -17,7 +17,7 @@ function F_ConnexionBDD()
    }
    catch(Exception $e)
    {
-      die('Erreur : ' . $e->getMessage());
+      die('Erreur F_ConnexionBDD : ' . $e->getMessage());
    }
 }
 
@@ -41,14 +41,14 @@ function P_TransfertPostDansSession()
          {
             // Si la quantité et le prix ne sont pas vide et ne sont pas égal à zero 
             // ("", NULL, 0 est interpreté comme vide pour empty, voila pourquoi je teste pas la valeur 0)
-            if (!empty($_POST['QuantiteProduit'.$NombreDeProduits]) && !empty($_POST['PrixDuJour'.$NombreDeProduits]))
+            if (!empty($_POST['QuantiteProduit' . $NombreDeProduits]) && !empty($_POST['PrixDuJour' . $NombreDeProduits]))
             {
                $intCompteurAjout += 1;
                $_SESSION['Panier']['DesignProduit'][$intCompteurAjout] = $_POST['listeProduits' . $NombreDeProduits];
-               // On force tout ce qui a pu être tapé en entier, si c'était autre chose qu'un entier, ça vaudra 0 
+               // On force tout ce qui a pu être tapé en réel, si c'était autre chose qu'un entier, ça vaudra 0.0 
                $_SESSION['Panier']['QuantiteProduit'][$intCompteurAjout] = (float) preg_replace('#,#','.',$_POST['QuantiteProduit' . $NombreDeProduits]);
                // J'utilise une expréssion régulière au cas ou une virgule est utilisé, les décimaux php n'accepte que le point.
-               $_SESSION['Panier']['PrixDuJour'][$intCompteurAjout] = (float) preg_replace('#,#','.',$_POST['PrixDuJour'.$NombreDeProduits]);
+               $_SESSION['Panier']['PrixDuJour'][$intCompteurAjout] = (float) preg_replace('#,#','.',$_POST['PrixDuJour' . $NombreDeProduits]);
             }
          }
       }
@@ -83,7 +83,7 @@ function F_CodeDuRestaurant($strNomRestaurant)
 }
 
 //
-// Création du nouvelle commande
+// Création de nouvelle commande
 //
 function P_CreationCommande($intCodeRestaurant)
 {
@@ -130,7 +130,7 @@ function P_AjoutDesProduits($RefProduit,$intDerniereID,$QteCommande,$PrixDuJour)
    {
       global $objBDD; // On travaille sur la variable globale $objBDD.
       // Je fais les insertions à l'aide d'une requête préparée.
-      $objPreparation = $objBDD->prepare('INSERT INTO Contenir(RefProduit, NumCommande, QteCommande, PrixDuJour) VALUES(:RefProduit, :NumCommande, :QteCommande, :PrixDuJour)');
+      $objPreparation = $objBDD->prepare('INSERT INTO Contenir VALUES(:RefProduit, :NumCommande, :QteCommande, :PrixDuJour)');
       $objPreparation->execute(array(
       'RefProduit' => $RefProduit, 
       'NumCommande' => $intDerniereID,
@@ -234,7 +234,7 @@ function F_ValeurDuProduit($strNomProduit)
 }
 
 //
-// Mise a jour du restaurant actuellement modifié
+// Mise à jour du restaurant actuellement modifié
 //
 function P_MAJRestaurant($SauvegardeNomRestaurant,$NomRestaurant,$Adr1Restaurant,$Adr2Restaurant,$CpRestaurant,$VilleRestaurant,$MelRestaurant,$TelRestaurant)
 {
@@ -259,7 +259,7 @@ function P_MAJRestaurant($SauvegardeNomRestaurant,$NomRestaurant,$Adr1Restaurant
 }
 
 //
-// Mise a jour du produit actuellement modifié
+// Mise à jour du produit actuellement modifié
 //
 function P_MAJProduit($SauvegardeNomProduits,$DesignProduit,$PrixProduit,$UniteVente)
 {
@@ -281,7 +281,7 @@ function P_MAJProduit($SauvegardeNomProduits,$DesignProduit,$PrixProduit,$UniteV
 }
 
 //
-// Suppression pur et simple du restaurant graçe a son nom
+// Suppression pur et simple du restaurant graçe à son nom
 //
 function P_SuppressionRestaurant($NomRestaurant)
 {
@@ -299,7 +299,7 @@ function P_SuppressionRestaurant($NomRestaurant)
 }
 
 //
-// Suppression pur et simple du Produit graçe a son nom
+// Suppression pur et simple du Produit graçe à son nom
 //
 function P_SuppressionProduit($DesignProduit)
 {

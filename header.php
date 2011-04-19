@@ -10,17 +10,15 @@
    <head>
       <meta charset="utf-8">
       <title>Au marché couvert</title>
-      <!-- meta -->
+      <!-- description et auteur -->
       <meta name="description" content="Gestion des restaurants de l'entreprise Au marché couvert.">
       <meta name="author" content="Julien Stechele">
-      <!-- mon icon -->
-      <link rel="shortcut-icon" href="favicon.ico">
       <!-- Renvoi vers un fichier séparé style.css -->
       <link href="http://localhost:8888/AuMarcheCouvert/style.css" type="text/css" rel="stylesheet" media="screen">
    </head>
    <body>
       <?php 
-         // Appel de la fonction de type procédure ConnexionBDD
+         // Appel de la fonction ConnexionBDD
          $objBDD = F_ConnexionBDD();
       ?>
       <div id="cadre">

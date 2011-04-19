@@ -1,6 +1,6 @@
 <?php include("header.php");?>
                <li><a href="index.php">Accueil</a></li>
-               <li><a href="commande.php">Nouvelle Commande</a></li>
+               <li><a href="commande.php">Nouvelle commande</a></li>
                <li><a href="consultation.php">Consultation</a></li>
                <li class="actif"><a href="administration.php">Administration</a></li>
             </ul>
@@ -16,12 +16,10 @@
                <form method="post" action="traitement/traitement-modification.php">
                   <p>
                      Que voulez-vous modifier ?
-                     <br />
-                     <br />
+                     <br /><br />
                      <input type="radio" name="modification" value="restaurant" id="restaurant" /><label for="restaurant">un restaurant</label><br />
                      <input type="radio" name="modification" value="produit" id="produit" /><label for="produit">un produit</label>
-                     <br />
-                     <br />
+                     <br /><br />
                      <input type="submit" value="Continuer" />
                   </p>
                </form>

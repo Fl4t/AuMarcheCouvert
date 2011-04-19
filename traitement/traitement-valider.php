@@ -21,7 +21,7 @@
                      $intRefProduit = F_RefDuProduit(stripslashes($_SESSION['Panier']['DesignProduit'][$intNombreDeProduits]));
                      $fltQteCommande = $_SESSION['Panier']['QuantiteProduit'][$intNombreDeProduits];
                      $fltPrixDuJour = $_SESSION['Panier']['PrixDuJour'][$intNombreDeProduits];
-                     P_AjoutDesProduits($intRefProduit,$intDerniereID,$fltQteCommande,$fltPrixDuJour); // Appel de la fonction P_AjoutDesProduit.
+                     P_AjoutDesProduits($intRefProduit,$intDerniereID,$fltQteCommande,$fltPrixDuJour); // Appel de la fonction P_AjoutDesProduits.
                   }
                   echo '<p class="centrer">';
                   echo 'Commande ajoutée !';
@@ -36,7 +36,7 @@
                   echo '<p class="centrer">';
                   echo 'Commande annulée.';
                   echo '<br />';
-                  echo '<a href=../index.php>Retour à l\'index</a>';
+                  echo '<a href=../traitement-valider.php>Retour aux commandes</a>';
                   echo '</p>';
                }
             ?>

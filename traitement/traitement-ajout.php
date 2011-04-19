@@ -21,8 +21,7 @@
                   {
                      if ($_POST['ajout'] == "restaurant")
                      {
-                        echo '<h2 class="centrer">Ajout d\'un restaurant</h2>';
-                        echo '<br />';
+                        echo '<p><h2 class="centrer">Ajout d\'un restaurant</h2></p>';
                         echo '<table>';
                         echo '<tr><td><label for="NomRestaurant">Nom du restaurant :</label></td><td><input type="text" name="NomRestaurant" id="NomRestaurant" /></td></tr>';
                         echo '<tr><td><label for="Adr1Restaurant">Adresse du restaurant (facultatif) :</label></td><td><input type="text" name="Adr1Restaurant" id="Adr1Restaurant" /></td></tr>';
@@ -32,13 +31,11 @@
                         echo '<tr><td><label for="MelRestaurant">E-Mail (facultatif) :</label></td><td><input type="text" name="MelRestaurant" id="MelRestaurant" /></td></tr>';
                         echo '<tr><td><label for="TelRestaurant">Téléphone (facultatif) :</label></td><td><input type="text" name="TelRestaurant" id="TelRestaurant" /></td></tr>';
                         echo '</table>';
-                        echo '<br />';
-                        echo '<center><input type="submit" value="Ajouter" /></center>';
+                        echo '<p class="centrer"><input type="submit" value="Ajouter" /></p>';
                      }
                      elseif ($_POST['ajout'] == "produit")
                      {
-                        echo '<h2 class="centrer">Ajout d\'un produit</h2>';
-                        echo '<br />';
+                        echo '<p><h2 class="centrer">Ajout d\'un produit</h2></p>';
                         echo '<table>';
                         echo '<tr><td><label for="DesignProduit">Nom du produit :</label></td><td><input type="text" name="DesignProduit" id="DesignProduit" /></td></tr>';
                         echo '<tr><td><label for="PrixProduit">Prix moyen constaté :</label></td><td><input type="text" name="PrixProduit" id="PrixProduit" /></td></tr>';
@@ -47,8 +44,7 @@
                         echo '<option value="unite">à l\'unité</option>';
                         echo '<option value="kilo">au kilo</option>';
                         echo '</select></td></tr></table>';
-                        echo '<br />';
-                        echo '<center><input type="submit" value="Ajouter" /></center>';
+                        echo '<p class="centrer"><input type="submit" value="Ajouter" /></p>';
                      }
                      else
                      {
@@ -60,10 +56,10 @@
                      }
                   }
                   //affichage pour savoir si c'est fait.
-                  echo '<pre>';
-                  echo 'POST : <br />';
-                  print_r($_POST);
-                  echo '</pre>';
+                  //echo '<pre>';
+                  //echo 'POST : <br />';
+                  //print_r($_POST);
+                  //echo '</pre>';
                   if (isset($_POST['NomRestaurant']))
                   {
                      if (empty($_POST['NomRestaurant']) || empty($_POST['CpRestaurant']) || empty($_POST['VilleRestaurant']))
@@ -76,7 +72,7 @@
                      }
                      else
                      {
-                        // On apelle la procédure paramétrée P_AjoutRestaurant.
+                        // On apelle la procédure paramétrée P_AjoutRestaurant. On en profite pour enlever les \ pour ne pas les avoir dans la bdd
                         P_AjoutRestaurant(stripslashes($_POST['NomRestaurant']),stripslashes($_POST['Adr1Restaurant']),stripslashes($_POST['Adr2Restaurant']),stripslashes($_POST['CpRestaurant']),stripslashes($_POST['VilleRestaurant']),stripslashes($_POST['MelRestaurant']),stripslashes($_POST['TelRestaurant']));
                         echo '<p class="centrer">';
                         echo 'Restaurant ajouté !';

@@ -29,9 +29,9 @@
                      // On récupère les noms des objRestaurants, sinon il y aura une erreur explicite.
                      $objNomRestaurants = $objBDD->query('SELECT NomRestaurant FROM restaurants ORDER BY NomRestaurant') or die(print_r($objBDD->errorInfo()));
                      // On affiche les noms des objRestaurants dans une liste déroulante.
-                     while ($strTableauNomRestaurants = $objNomRestaurants->fetch())
+                     while ($strNomRestaurants = $objNomRestaurants->fetch())
                      {
-                        echo '<option value="'.htmlspecialchars($strTableauNomRestaurants['NomRestaurant']).'">'.htmlspecialchars($strTableauNomRestaurants['NomRestaurant']).'</option>';
+                        echo '<option value="' . htmlspecialchars($strNomRestaurants['NomRestaurant']) . '">' . htmlspecialchars($strNomRestaurants['NomRestaurant']) . '</option>';
                      }
                      $objNomRestaurants->closeCursor(); // Termine le traitement de la requête
                      echo '</select><br />';
@@ -48,9 +48,9 @@
                      // On récupère la liste des produits, sinon il y aura une erreur explicite.
                      $objProduits = $objBDD->query('SELECT DesignProduit FROM Produits ORDER BY DesignProduit') or die(print_r($objBDD->errorInfo()));
                      // On affiche les noms des Restaurants dans une liste déroulante.
-                     while ($strTableauProduits = $objProduits->fetch())
+                     while ($strNomProduits = $objProduits->fetch())
                      {
-                        echo '<option value="'.htmlspecialchars($strTableauProduits['DesignProduit']).'">'.htmlspecialchars($strTableauProduits['DesignProduit']).'</option>';
+                        echo '<option value="' . htmlspecialchars($strNomProduits['DesignProduit']) . '">' . htmlspecialchars($strNomProduits['DesignProduit']) . '</option>';
                      }
                      $objProduits->closeCursor(); // Termine le traitement de la requête
                      echo '</select><br />';
@@ -62,7 +62,7 @@
                      echo '<p class="centrer">';
                      echo 'Vous devez séléctionner une des possibilités.';
                      echo '<br />';
-                     echo '<a href=../index.php>Retour à l\'index</a>';
+                     echo '<a href=../traitement-suppression.php>Retour aux suppressions</a>';
                      echo '</p>';
                   }
                }
@@ -73,7 +73,7 @@
                   echo '<p class="centrer">';
                   echo 'Le restaurant a été supprimé !';
                   echo '<br />';
-                  echo '<a href=../index.php>Retour à l\'index</a>';
+                  echo '<a href=../traitement-suppression.php>Retour aux suppressions</a>';
                   echo '</p>';
                }
                elseif (isset($_POST['listeProduits']))

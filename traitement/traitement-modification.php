@@ -34,7 +34,7 @@
                      // On affiche les noms des objRestaurants dans une liste déroulante.
                      while ($strTableauNomRestaurants = $objNomRestaurants->fetch())
                      {
-                        echo '<option value="'.htmlspecialchars($strTableauNomRestaurants['NomRestaurant']).'">'.htmlspecialchars($strTableauNomRestaurants['NomRestaurant']).'</option>';
+                        echo '<option value="' . htmlspecialchars($strTableauNomRestaurants['NomRestaurant']) . '">' . htmlspecialchars($strTableauNomRestaurants['NomRestaurant']) . '</option>';
                      }
                      $objNomRestaurants->closeCursor(); // Termine le traitement de la requête
                      echo '</select><br />';
@@ -53,7 +53,7 @@
                      // On affiche les noms des Restaurants dans une liste déroulante.
                      while ($strTableauProduits = $objProduits->fetch())
                      {
-                        echo '<option value="'.htmlspecialchars($strTableauProduits['DesignProduit']).'">'.htmlspecialchars($strTableauProduits['DesignProduit']).'</option>';
+                        echo '<option value="' . htmlspecialchars($strTableauProduits['DesignProduit']) . '">' . htmlspecialchars($strTableauProduits['DesignProduit']) . '</option>';
                      }
                      $objProduits->closeCursor(); // Termine le traitement de la requête
                      echo '</select><br />';
@@ -65,7 +65,7 @@
                      echo '<p class="centrer">';
                      echo 'Vous devez séléctionner une des possibilités.';
                      echo '<br />';
-                     echo '<a href=../index.php>Retour à l\'index</a>';
+                     echo '<a href=../traitement-modification.php>Retour aux modifications</a>';
                      echo '</p>';
                   }
                }
@@ -81,13 +81,13 @@
                   echo '<h2>Modification d\'un restaurant</h2>';
                   echo '<form method="POST" action="traitement-modification.php">';
                   echo '<table>';
-                  echo '<tr><td><label for="NomRestaurant">Nom du restaurant :</label></td><td><input type="text" name="NomRestaurant" id="NomRestaurant" value="'.htmlspecialchars($strValeurDuRestaurant['NomRestaurant']).'"/></td></tr>';
-                  echo '<tr><td><label for="Adr1Restaurant">Adresse du restaurant (facultatif) :</label></td><td><input type="text" name="Adr1Restaurant" id="Adr1Restaurant"value="'.htmlspecialchars($strValeurDuRestaurant['Adr1Restaurant']).'"/></td></tr>';
-                  echo '<tr><td><label for="Adr2Restaurant"></label></td><td><input type="text" name="Adr2Restaurant" id="Adr2Restaurant" value="'.htmlspecialchars($strValeurDuRestaurant['Adr2Restaurant']).'"/></td></tr>';
-                  echo '<tr><td><label for="CpRestaurant">Code postal :</label></td><td><input type="text" name="CpRestaurant" id="CpRestaurant" value="'.htmlspecialchars($strValeurDuRestaurant['CpRestaurant']).'"/></td></tr>';
-                  echo '<tr><td><label for="VilleRestaurant">Ville :</label></td><td><input type="text" name="VilleRestaurant" id="VilleRestaurant" value="'.htmlspecialchars($strValeurDuRestaurant['VilleRestaurant']).'"/></td></tr>';
-                  echo '<tr><td><label for="MelRestaurant">E-Mail (facultatif) :</label></td><td><input type="text" name="MelRestaurant" id="MelRestaurant" value="'.htmlspecialchars($strValeurDuRestaurant['MelRestaurant']).'"/></td></tr>';
-                  echo '<tr><td><label for="TelRestaurant">Téléphone (facultatif) :</label></td><td><input type="text" name="TelRestaurant" id="TelRestaurant" value="'.htmlspecialchars($strValeurDuRestaurant['TelRestaurant']).'"/></td></tr>';
+                  echo '<tr><td><label for="NomRestaurant">Nom du restaurant :</label></td><td><input type="text" name="NomRestaurant" id="NomRestaurant" value="' . htmlspecialchars($strValeurDuRestaurant['NomRestaurant']) . '"/></td></tr>';
+                  echo '<tr><td><label for="Adr1Restaurant">Adresse du restaurant (facultatif) :</label></td><td><input type="text" name="Adr1Restaurant" id="Adr1Restaurant"value="' . htmlspecialchars($strValeurDuRestaurant['Adr1Restaurant']) . '"/></td></tr>';
+                  echo '<tr><td><label for="Adr2Restaurant"></label></td><td><input type="text" name="Adr2Restaurant" id="Adr2Restaurant" value="' . htmlspecialchars($strValeurDuRestaurant['Adr2Restaurant']) . '"/></td></tr>';
+                  echo '<tr><td><label for="CpRestaurant">Code postal :</label></td><td><input type="text" name="CpRestaurant" id="CpRestaurant" value="' . htmlspecialchars($strValeurDuRestaurant['CpRestaurant']) . '"/></td></tr>';
+                  echo '<tr><td><label for="VilleRestaurant">Ville :</label></td><td><input type="text" name="VilleRestaurant" id="VilleRestaurant" value="' . htmlspecialchars($strValeurDuRestaurant['VilleRestaurant']) . '"/></td></tr>';
+                  echo '<tr><td><label for="MelRestaurant">E-Mail (facultatif) :</label></td><td><input type="text" name="MelRestaurant" id="MelRestaurant" value="' . htmlspecialchars($strValeurDuRestaurant['MelRestaurant']) . '"/></td></tr>';
+                  echo '<tr><td><label for="TelRestaurant">Téléphone (facultatif) :</label></td><td><input type="text" name="TelRestaurant" id="TelRestaurant" value="' . htmlspecialchars($strValeurDuRestaurant['TelRestaurant']) . '"/></td></tr>';
                   echo '</table>';
                   echo '<center><input type="submit" value="Modifier" /></center>';
                   echo '</form>';
@@ -100,8 +100,8 @@
                   echo '<h2>Modification d\'un produit</h2>';
                   echo '<form method="POST" action="traitement-modification.php">';
                   echo '<table>';
-                  echo '<tr><td><label for="DesignProduit">Nom du produit :</label></td><td><input type="text" name="DesignProduit" id="DesignProduit" value="'.htmlspecialchars($strValeurDuProduit['DesignProduit']).'"/></td></tr>';
-                  echo '<tr><td><label for="PrixProduit">Prix moyen constaté :</label></td><td><input type="text" name="PrixProduit" id="PrixProduit" value="'.htmlspecialchars($strValeurDuProduit['PrixProduit']).'"/></td></tr>';
+                  echo '<tr><td><label for="DesignProduit">Nom du produit :</label></td><td><input type="text" name="DesignProduit" id="DesignProduit" value="' . htmlspecialchars($strValeurDuProduit['DesignProduit']) . '"/></td></tr>';
+                  echo '<tr><td><label for="PrixProduit">Prix moyen constaté :</label></td><td><input type="text" name="PrixProduit" id="PrixProduit" value="' . htmlspecialchars($strValeurDuProduit['PrixProduit']) . '"/></td></tr>';
                   echo '<tr><td><label for="UniteVente">Unité de vente :</label></td>';
                   echo '<td><select name="UniteVente" id="UniteVente">';
                   echo '<option value="unite">à l\'unité</option>';
@@ -132,7 +132,7 @@
                   echo '<p class="centrer">';
                   echo 'Modification du produit reussi !';
                   echo '<br />';
-                  echo '<a href=../index.php>Retour à l\'index</a>';
+                  echo '<a href=../traitement-Modification.php>Retour aux modifications</a>';
                   echo '</p>';
                }
             ?>

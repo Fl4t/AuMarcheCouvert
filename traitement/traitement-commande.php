@@ -19,25 +19,23 @@
                if ($intNombreDeProduits != 0) 
                {
                   $fltTotalHT = 0;
-                  echo '<h3><strong>'.htmlspecialchars($_SESSION['NomRestaurant']).'</strong></h3>';
-                  echo '<table>';
-                  echo '<thead>';
+                  echo '<h3><strong>' . htmlspecialchars($_SESSION['NomRestaurant']) . '</strong></h3>';
+                  echo '<table><thead>';
                   echo '<tr>';
                   echo '<td class="recapitulatif">Produits :</td>';
                   echo '<td class="recapitulatif">Quantité :</td>';
                   echo '<td class="recapitulatif">Prix du jour :</td>';
                   echo '<td class="recapitulatif">Prix HT :</td>';
                   echo '</tr>';
-                  echo '</thead>';
-                  echo '<tbody>';
+                  echo '</thead><tbody>';
                   // On affiche le panier.
                   for($intAffichage=1;$intAffichage<=$intNombreDeProduits;$intAffichage++)
                   {
                      echo '<tr>';
-                     echo '<td class="recapitulatif">'.stripslashes(htmlspecialchars($_SESSION['Panier']['DesignProduit'][$intAffichage])).'</td>';
-                     echo '<td class="recapitulatif">'.htmlspecialchars($_SESSION['Panier']['QuantiteProduit'][$intAffichage]).'</td>';
-                     echo '<td class="recapitulatif">'.htmlspecialchars($_SESSION['Panier']['PrixDuJour'][$intAffichage]).' €</td>';
-                     echo '<td class="recapitulatif">'.htmlspecialchars($_SESSION['Panier']['PrixDuJour'][$intAffichage])*htmlspecialchars($_SESSION['Panier']['QuantiteProduit'][$intAffichage]).' €</td>';
+                     echo '<td class="recapitulatif">' . stripslashes(htmlspecialchars($_SESSION['Panier']['DesignProduit'][$intAffichage])) . '</td>';
+                     echo '<td class="recapitulatif">' . htmlspecialchars($_SESSION['Panier']['QuantiteProduit'][$intAffichage]) . '</td>';
+                     echo '<td class="recapitulatif">' . htmlspecialchars($_SESSION['Panier']['PrixDuJour'][$intAffichage]) . ' €</td>';
+                     echo '<td class="recapitulatif">' . htmlspecialchars($_SESSION['Panier']['PrixDuJour'][$intAffichage])*htmlspecialchars($_SESSION['Panier']['QuantiteProduit'][$intAffichage]) . ' €</td>';
                      echo '</tr>';
                      // Calcul du Prix Total
                      $fltTotalHT += htmlspecialchars($_SESSION['Panier']['PrixDuJour'][$intAffichage])*htmlspecialchars($_SESSION['Panier']['QuantiteProduit'][$intAffichage]);
@@ -46,10 +44,9 @@
                echo '<td></td>';
                echo '<td></td>';
                echo '<td class="centrer"><b>Prix Total :</b></td>';
-               echo '<td class="centrer">'.$fltTotalHT.' €</td>';
+               echo '<td class="centrer">' . $fltTotalHT . ' €</td>';
                echo '</tr>';
-               echo '</tbody>';
-               echo '</table>';
+               echo '</tbody></table>';
                //formulaire de test pour ecrire la commande dans la base de donnée
                ?>
                <form method="post" action="traitement-valider.php">

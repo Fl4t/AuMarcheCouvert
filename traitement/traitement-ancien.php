@@ -1,15 +1,14 @@
 <?php include("../header.php");?>
                <li><a href="http://localhost:8888/AuMarcheCouvert/index.php">Accueil</a></li>
                <li><a href="http://localhost:8888/AuMarcheCouvert/commande.php">Nouvelle Commande</a></li>
-               <li><a href="http://localhost:8888/AuMarcheCouvert/consultation.php">Consultation</a></li>
-               <li class="actif"><a href="http://localhost:8888/AuMarcheCouvert/administration.php">Administration</a></li>
+               <li class="actif"><a href="http://localhost:8888/AuMarcheCouvert/consultation.php">Consultation</a></li>
+               <li><a href="http://localhost:8888/AuMarcheCouvert/administration.php">Administration</a></li>
             </ul>
          </nav>
          <div id="panneau">
             <ul>
                <li class="actif"><a href="http://localhost:8888/AuMarcheCouvert/traitement/traitement-ancien.php">Ancienne commande</a></li>
-               <li><a href="http://localhost:8888/AuMarcheCouvert/"></a></li>
-               <li><a href="http://localhost:8888/AuMarcheCouvert/"></a></li>
+               <li><a href="http://localhost:8888/AuMarcheCouvert/traitement/traitement-mois.php">Recapitulatif mensuel</a></li>
             </ul>
          </div>
          <div id="texte">
@@ -26,32 +25,32 @@
                         try
                         {
                            echo '<form method="POST" action="traitement-ancien.php">';
-                           echo '<p><label for="listeCommande">Choisissez une commande : </label>';
-                           echo '<select name="listeCommande" id="listeCommande">';
+                           echo '<table><tr><td><label for="listeCommande">Choisissez une commande : </label></td>';
+                           echo '<td><select name="listeCommande" id="listeCommande">';
                            // On crée une ligne vide pour qu'il n'y est rien par defaut.
                            echo '<option value="Vide" selected="selected"></option>';
                            $objCommandeDuRestaurant = $objBDD->prepare('SELECT NumCommande FROM Commandes INNER JOIN Restaurants ON Restaurants.CodeRestaurant = Commandes.CodeRestaurant WHERE NomRestaurant = :NomRestaurant ORDER BY NumCommande');
                            $objCommandeDuRestaurant->execute(array('NomRestaurant' => stripslashes($_POST['listeRestaurants'])));
                            while ($strCommandeDuRestaurant = $objCommandeDuRestaurant->fetch())
                            {
-                              echo '<option value="'.htmlspecialchars($strCommandeDuRestaurant['NumCommande']).'">'.htmlspecialchars($strCommandeDuRestaurant['NumCommande']).'</option>';
+                              echo '<option value="' . htmlspecialchars($strCommandeDuRestaurant['NumCommande']) . '">' . htmlspecialchars($strCommandeDuRestaurant['NumCommande']) . '</option>';
                            }
                            $objCommandeDuRestaurant->closeCursor(); 
-                           echo '</select><br />';
-                           echo '<input type="submit" value="Continuer" /></p>';
-                           echo '</form>';
                         }
                         catch(Exception $e)
                         {
-                           die('Erreur P_CommandeDuRestaurant : ' . $e->getMessage());
+                           die('Erreur objCommandeDuRestaurant : ' . $e->getMessage());
                         }
+                        echo '</td></tr></table></select>';
+                        echo '<p class="centrer"><input type="submit" value="Continuer" /></p>';
+                        echo '</form>';
                      }
                      else
                      {
                         echo '<p class="centrer">';
                         echo 'Vous devez séléctionner un restaurant.';
                         echo '<br />';
-                        echo '<a href=../index.php>Retour à l\'index</a>';
+                        echo '<a href=traitement-ancien.php>Retour aux anciennes commandes.</a>';
                         echo '</p>';
                      }
                   }
@@ -59,19 +58,15 @@
                   {
                      if ($_POST['listeCommande'] != "Vide")
                      {
-                        echo '<h3><strong>'.htmlspecialchars($_SESSION['NomRestaurant']).'</strong></h3>';
+                        echo '<h3><strong>' . htmlspecialchars($_SESSION['NomRestaurant']) . '</strong></h3>';
                         // J'en ai pas besoin plus longtemps.
                         session_destroy();
-                        echo '<table>';
-                        echo '<thead>';
-                        echo '<tr>';
+                        echo '<table><thead><tr>';
                         echo '<td class="recapitulatif">Produits :</td>';
                         echo '<td class="recapitulatif">Quantité :</td>';
                         echo '<td class="recapitulatif">Prix du jour :</td>';
                         echo '<td class="recapitulatif">Prix HT :</td>';
-                        echo '</tr>';
-                        echo '</thead>';
-                        echo '<tbody>';
+                        echo '</tr></thead><tbody>';
                         try
                         {
                            // On affiche la commande via une requête SQL.
@@ -80,10 +75,10 @@
                            while ($strContenirCommande=$objContenirCommande->fetch())
                            {
                               echo '<tr>';
-                              echo '<td class="recapitulatif">'.$strContenirCommande['DesignProduit'].'</td>';
-                              echo '<td class="recapitulatif">'.$strContenirCommande['QteCommande'].'</td>';
-                              echo '<td class="recapitulatif">'.$strContenirCommande['PrixDuJour'].' €</td>';
-                              echo '<td class="recapitulatif">'.$strContenirCommande['Total'].' €</td>';
+                              echo '<td class="recapitulatif">' . $strContenirCommande['DesignProduit'] . '</td>';
+                              echo '<td class="recapitulatif">' . $strContenirCommande['QteCommande'] . '</td>';
+                              echo '<td class="recapitulatif">' . $strContenirCommande['PrixDuJour'].' €</td>';
+                              echo '<td class="recapitulatif">' . $strContenirCommande['Total'] . ' €</td>';
                               echo '</tr>';
                            }
                            $objContenirCommande->closeCursor();
@@ -96,14 +91,12 @@
                            echo '<td></td>';
                            echo '<td></td>';
                            echo '<td class="centrer"><b>Prix Total :</b></td>';
-                           echo '<td class="centrer">'.$strPrixCommande['TotalCommande'].' €</td>';
-                           echo '</tr>';
-                           echo '</tbody>';
-                           echo '</table>';
+                           echo '<td class="centrer">' . $strPrixCommande['TotalCommande'] . ' €</td>';
+                           echo '</tr></tbody></table>';
                         }
                         catch(Exception $e)
                         {
-                           die('Erreur : ' . $e->getMessage());
+                           die('Erreur strPrixCommande : ' . $e->getMessage());
                         }
                      } 
                      else
@@ -121,20 +114,29 @@
                      // Première étape : On séléctionne un restaurant.
                      //
                      echo '<form method="POST" action="traitement-ancien.php">';
-                     echo '<p><label for="listeRestaurants">Choisissez un restaurant : </label>';
-                     echo '<select name="listeRestaurants" id="listeRestaurants">';
+                     echo '';
+                     echo '<table><tr><td><label for="listeRestaurants">Choisissez un restaurant : </label></td>';
+                     echo '<td><select name="listeRestaurants" id="listeRestaurants">';
                      // On crée une ligne vide pour qu'il n'y est rien par defaut.
                      echo '<option value="Vide" selected="selected"></option>';
-                     // On récupère les noms des objRestaurants, sinon il y aura une erreur explicite.
-                     $objNomRestaurants = $objBDD->query('SELECT NomRestaurant FROM restaurants ORDER BY restaurants') or die(print_r($objBDD->errorInfo()));
-                     // On affiche les noms des objRestaurants dans une liste déroulante.
-                     while ($strTableauNomRestaurants = $objNomRestaurants->fetch())
+                     try
                      {
-                        echo '<option value="'.htmlspecialchars($strTableauNomRestaurants['NomRestaurant']).'">'.htmlspecialchars($strTableauNomRestaurants['NomRestaurant']).'</option>';
+                        // On récupère les noms des objRestaurants, sinon il y aura une erreur explicite.
+                        $objNomRestaurants = $objBDD->query('SELECT NomRestaurant FROM restaurants ORDER BY NomRestaurant');
+                        // On affiche les noms des objRestaurants dans une liste déroulante.
+                        while ($strNomRestaurants = $objNomRestaurants->fetch())
+                        {
+                           echo '<option value="' . htmlspecialchars($strNomRestaurants['NomRestaurant']) . '">' . htmlspecialchars($strNomRestaurants['NomRestaurant']) . '</option>';
+                        }
+                        $objNomRestaurants->closeCursor(); // Termine le traitement de la requête
                      }
-                     $objNomRestaurants->closeCursor(); // Termine le traitement de la requête
-                     echo '</select><br />';
-                     echo '<input type="submit" value="Continuer" />';
+                     catch (Exception $e)
+                     {
+                        die('Erreur strNomRestaurants :' . $e->getMessage());
+                     }
+                     echo '</td></tr></table>';
+                     echo '</select>';
+                     echo '<p class="centrer"><input type="submit" value="Continuer" /></p>';
                      echo '</form>';
                   }
                ?>
