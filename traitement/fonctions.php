@@ -62,7 +62,7 @@ function P_TransfertPostDansSession()
 }
 
 //
-// Recupère le code du restaurant a partir du nom du restaurant fourni en parramètre.
+// Recupère le code du restaurant a partir du nom du restaurant fourni en paramètre.
 // 
 function F_CodeDuRestaurant($strNomRestaurant)
 {
