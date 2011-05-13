@@ -8,11 +8,6 @@
          <div id="texte">
             <!-- Contenu de la page traitement-commande.php --> 
             <?php
-               // affichage pour savoir si c'est fait.
-               //echo '<pre>';
-               //echo 'POST : <br />';
-               //print_r($_POST);
-               //echo '</pre>';
                P_TransfertPostDansSession(); // On apelle la fonction de transfert session <- post.
                // Pour un code moin lourd.
                $intNombreDeProduits = $_SESSION['NombreDeProduits'];             

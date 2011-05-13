@@ -95,7 +95,7 @@
                      // On affiche les restaurants dans une liste déroulante
                      try
                      {
-                        $objNomRestaurants = $objBDD->query('SELECT NomRestaurant FROM restaurants ORDER BY NomRestaurant');
+                        $objNomRestaurants = $objBDD->query('SELECT NomRestaurant FROM Restaurants ORDER BY NomRestaurant');
                         // On affiche les noms des objRestaurants dans une liste déroulante.
                         while ($strNomRestaurants = $objNomRestaurants->fetch())
                         {

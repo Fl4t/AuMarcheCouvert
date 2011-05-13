@@ -122,7 +122,7 @@
                      try
                      {
                         // On récupère les noms des objRestaurants, sinon il y aura une erreur explicite.
-                        $objNomRestaurants = $objBDD->query('SELECT NomRestaurant FROM restaurants ORDER BY NomRestaurant');
+                        $objNomRestaurants = $objBDD->query('SELECT NomRestaurant FROM Restaurants ORDER BY NomRestaurant');
                         // On affiche les noms des objRestaurants dans une liste déroulante.
                         while ($strNomRestaurants = $objNomRestaurants->fetch())
                         {

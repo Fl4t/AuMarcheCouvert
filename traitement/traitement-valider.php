@@ -7,6 +7,11 @@
          </nav>
          <div id="texte">
             <?php
+               // affichage pour savoir si c'est fait.
+               echo '<pre>';
+               echo 'SESSION : <br />';
+               print_r($_SESSION);
+               echo '</pre>';
                if ($_POST['valider'] == "Oui")
                {
                   // Appel de la fonction F_CodeDuRestaurant
@@ -29,14 +34,14 @@
                   echo '<a href=../index.php>Retour à l\'index</a>';
                   echo '</p>';
                   // Détruit la variable SESSION puisque l'on à fini !
-                  session_destroy();
+                  //session_destroy();
                }
                else
                {
                   echo '<p class="centrer">';
                   echo 'Commande annulée.';
                   echo '<br />';
-                  echo '<a href=../traitement-valider.php>Retour aux commandes</a>';
+                  echo '<a href=../commande.php>Retour aux commandes</a>';
                   echo '</p>';
                }
             ?>

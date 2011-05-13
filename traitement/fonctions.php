@@ -55,10 +55,10 @@ function P_TransfertPostDansSession()
    }
    $_SESSION['NombreDeProduits'] = count($_SESSION['Panier']['DesignProduit']);
    // affichage pour savoir si c'est fait.
-   //echo '<pre>';
-   //echo 'SESSION : <br />';
-   //print_r($_SESSION);
-   //echo '</pre>';
+   echo '<pre>';
+   echo 'SESSION : <br />';
+   print_r($_SESSION);
+   echo '</pre>';
 }
 
 //
