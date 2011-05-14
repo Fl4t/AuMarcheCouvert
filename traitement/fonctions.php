@@ -26,8 +26,8 @@ function F_ConnexionBDD()
 // 
 function P_TransfertPostDansSession()
 {
-   // On detruit la session pour effacer les valeurs précédentes éventuelles. 
-   session_destroy();
+   // On remets à zero SESSION
+   unset($_SESSION);
    // Si le restaurant a été renseigné, on continue.
    if ($_POST['listeRestaurant'] != "Vide")
    {
