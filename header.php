@@ -3,7 +3,7 @@
 session_start();
 
 // Chargement des fonctions.
-include("/Users/fl4t/Sites/AuMarcheCouvert/traitement/fonctions.php");
+include_once("/Users/fl4t/Sites/AuMarcheCouvert/traitement/fonctions.php");
 ?>
 <!DOCTYPE html>
 <html lang="fr">

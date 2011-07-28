@@ -22,12 +22,10 @@ function F_ConnexionBDD()
 }
 
 //
-// On affecte toutes les valeurs de la superglobale $_POST à $_SESSION si ils sont valide. 
-// 
+// On affecte toutes les valeurs de la superglobale $_POST à $_SESSION si ils sont valide.
+//
 function P_TransfertPostDansSession()
 {
-   // On remets à zero SESSION
-   unset($_SESSION);
    // Si le restaurant a été renseigné, on continue.
    if ($_POST['listeRestaurant'] != "Vide")
    {
@@ -39,13 +37,13 @@ function P_TransfertPostDansSession()
          // Si un produit a été séléctionné.
          if ($_POST['listeProduits' . $NombreDeProduits] != "Vide")
          {
-            // Si la quantité et le prix ne sont pas vide et ne sont pas égal à zero 
+            // Si la quantité et le prix ne sont pas vide et ne sont pas égal à zero
             // ("", NULL, 0 est interpreté comme vide pour empty, voila pourquoi je teste pas la valeur 0)
             if (!empty($_POST['QuantiteProduit' . $NombreDeProduits]) && !empty($_POST['PrixDuJour' . $NombreDeProduits]))
             {
                $intCompteurAjout += 1;
                $_SESSION['Panier']['DesignProduit'][$intCompteurAjout] = $_POST['listeProduits' . $NombreDeProduits];
-               // On force tout ce qui a pu être tapé en réel, si c'était autre chose qu'un entier, ça vaudra 0.0 
+               // On force tout ce qui a pu être tapé en réel, si c'était autre chose qu'un entier, ça vaudra 0.0
                $_SESSION['Panier']['QuantiteProduit'][$intCompteurAjout] = (float) preg_replace('#,#','.',$_POST['QuantiteProduit' . $NombreDeProduits]);
                // J'utilise une expréssion régulière au cas ou une virgule est utilisé, les décimaux php n'accepte que le point.
                $_SESSION['Panier']['PrixDuJour'][$intCompteurAjout] = (float) preg_replace('#,#','.',$_POST['PrixDuJour' . $NombreDeProduits]);
@@ -63,7 +61,7 @@ function P_TransfertPostDansSession()
 
 //
 // Recupère le code du restaurant a partir du nom du restaurant fourni en paramètre.
-// 
+//
 function F_CodeDuRestaurant($strNomRestaurant)
 {
    global $objBDD; // On travaille sur la variable globale $objBDD.
@@ -132,7 +130,7 @@ function P_AjoutDesProduits($RefProduit,$intDerniereID,$QteCommande,$PrixDuJour)
       // Je fais les insertions à l'aide d'une requête préparée.
       $objPreparation = $objBDD->prepare('INSERT INTO Contenir VALUES(:RefProduit, :NumCommande, :QteCommande, :PrixDuJour)');
       $objPreparation->execute(array(
-      'RefProduit' => $RefProduit, 
+      'RefProduit' => $RefProduit,
       'NumCommande' => $intDerniereID,
       'QteCommande' => $QteCommande,
       'PrixDuJour' => $PrixDuJour));
@@ -145,7 +143,7 @@ function P_AjoutDesProduits($RefProduit,$intDerniereID,$QteCommande,$PrixDuJour)
 
 //
 // Fonction d'ajout d'un nouveau restaurant
-// 
+//
 function P_AjoutRestaurant($NomRestaurant,$Adr1Restaurant,$Adr2Restaurant,$CpRestaurant,$VilleRestaurant,$MelRestaurant,$TelRestaurant)
 {
    try
@@ -213,7 +211,7 @@ function F_ValeurDuRestaurant($strNomRestaurant)
 
 //
 // Donne les informations d'un produit graçe a son nom
-// Utiliser dans la modification d'un produit 
+// Utiliser dans la modification d'un produit
 //
 function F_ValeurDuProduit($strNomProduit)
 {
@@ -264,7 +262,7 @@ function P_MAJRestaurant($SauvegardeNomRestaurant,$NomRestaurant,$Adr1Restaurant
 function P_MAJProduit($SauvegardeNomProduits,$DesignProduit,$PrixProduit,$UniteVente)
 {
    try
-   { 
+   {
       global $objBDD; // On travaille sur la variable globale $objBDD.
       // Je fais les insertions à l'aide d'une requête préparée.
       $objPreparation = $objBDD->prepare('UPDATE Produits SET DesignProduit=:DesignProduit, PrixProduit=:PrixProduit, UniteVente=:UniteVente WHERE DesignProduit=:SauvegardeNomProduits');
