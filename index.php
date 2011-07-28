@@ -15,7 +15,7 @@
                <p>
                   <strong>Nouvelle commande</strong> permet d'enregistrer une commande pour un restaurant.
                </p>
-               <h2>Consultation</h2> 
+               <h2>Consultation</h2>
                <p>
                   <strong>Consultation</strong> est un onglet qui permet de vérifier différentes informations de la base de donnée comme les anciennes commandes, le recapitulatif mensuel des restaurants...
                </p>

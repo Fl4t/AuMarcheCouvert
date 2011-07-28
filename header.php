@@ -1,9 +1,9 @@
 <?php
-   // On démarre la session AVANT d'écrire du code HTML
-   session_start();
+// On démarre la session AVANT d'écrire du code HTML
+session_start();
 
-   // Chargement des fonctions.
-   include("/Users/fl4t/Sites/AuMarcheCouvert/traitement/fonctions.php");
+// Chargement des fonctions.
+include("/Users/fl4t/Sites/AuMarcheCouvert/traitement/fonctions.php");
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -14,13 +14,13 @@
       <meta name="description" content="Gestion des restaurants de l'entreprise Au marché couvert.">
       <meta name="author" content="Julien Stechele">
       <!-- Renvoi vers un fichier séparé style.css -->
-      <link href="http://localhost:8888/AuMarcheCouvert/style.css" type="text/css" rel="stylesheet" media="screen">
+      <link href="http://localhost/bdd/style.css" type="text/css" rel="stylesheet" media="screen">
    </head>
    <body>
-      <?php 
-         // Appel de la fonction ConnexionBDD
-         $objBDD = F_ConnexionBDD();
-      ?>
+<?php
+// Appel de la fonction ConnexionBDD
+$objBDD = F_ConnexionBDD();
+?>
       <div id="cadre">
          <header>
          <!-- Placement de l'image "degrade-haut.php" via le css -->

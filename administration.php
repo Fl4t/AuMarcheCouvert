@@ -16,13 +16,13 @@
             <blockquote>
                <h2>Ajout</h2>
                <p>
-                  <strong>Ajout</strong> permet d'entrer de nouveaux produits et restaurants. 
+                  <strong>Ajout</strong> permet d'entrer de nouveaux produits et restaurants.
                </p>
-               <h2>Modification</h2> 
+               <h2>Modification</h2>
                <p>
                   <strong>Modification</strong> permet d'actualiser des données sur des restaurants ou produits existants.
                </p>
-               <h2>Suppression</h2> 
+               <h2>Suppression</h2>
                <p>
                   <strong>Suppression</strong> permet de retirer des produits qui ne sont plus utilisées ou un restaurant.
                </p>
