@@ -33,8 +33,8 @@ if ($_POST['valider'] == "Oui")
     echo '<br />';
     echo '<a href=../index.php>Retour à l\'index</a>';
     echo '</p>';
-    // Détruit la variable SESSION puisque l'on à fini !
-    session_destroy();
+    // On remets à zero SESSION
+    unset($_SESSION);
 }
 else
 {
