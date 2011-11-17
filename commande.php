@@ -1,12 +1,12 @@
                <?php include("header.php");?>
-               <li><a href="index.php">Acceuil</a></li>
+               <li><a href="index.php">Accueil</a></li>
                <li class="actif"><a href="commande.php">Nouvelle commande</a></li>
                <li><a href="consultation.php">Consultation</a></li>
                <li><a href="administration.php">Administration</a></li>
             </ul>
          </nav>
          <div id="texte">
-            <!-- Contenu de la page commande.php --> 
+            <!-- Contenu de la page commande.php -->
             <p>
                Choisissez les produits ainsi que les quantités souhaités.<br />
             </p>
@@ -58,7 +58,7 @@
                      <?php
                         echo '<td><input type="text" name="QuantiteProduit' . $intCompteur . '" id="QuantiteProduit' . $intCompteur . '" /></td>';
                         echo '<td><input type="text" name="PrixDuJour' . $intCompteur . '" id="PrixDuJour' . $intCompteur . '" /> €</td>';
-                     ?>   
+                     ?>
                   </tr>
                </table>
                <?php
