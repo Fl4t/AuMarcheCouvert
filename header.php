@@ -3,7 +3,8 @@
 session_start();
 
 // Chargement des fonctions.
-include_once("/Users/fl4t/Sites/AuMarcheCouvert/traitement/fonctions.php");
+$path = dirname(__FILE__);
+include_once($path."/traitement/fonctions.php");
 ?>
 <!DOCTYPE html>
 <html lang="fr">
