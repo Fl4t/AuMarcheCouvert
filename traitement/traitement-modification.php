@@ -1,15 +1,15 @@
 <?php include("../header.php");?>
-               <li><a href="http://localhost/bdd/index.php">Accueil</a></li>
-               <li><a href="http://localhost/bdd/commande.php">Nouvelle commande</a></li>
-               <li><a href="http://localhost/bdd/consultation.php">Consultation</a></li>
-               <li class="actif"><a href="http://localhost/bdd/administration.php">Administration</a></li>
+               <li><a href="../index.php">Accueil</a></li>
+               <li><a href="../commande.php">Nouvelle commande</a></li>
+               <li><a href="../consultation.php">Consultation</a></li>
+               <li class="actif"><a href="../administration.php">Administration</a></li>
             </ul>
          </nav>
          <div id="panneau">
             <ul>
-               <li><a href="http://localhost/bdd/ajout.php">Ajout</a></li>
-               <li class="actif"><a href="http://localhost/bdd/modification.php">Modification</a></li>
-               <li><a href="http://localhost/bdd/suppression.php">Suppression</a></li>
+               <li><a href="../ajout.php">Ajout</a></li>
+               <li class="actif"><a href="../modification.php">Modification</a></li>
+               <li><a href="../suppression.php">Suppression</a></li>
             </ul>
          </div>
          <div id="texte">

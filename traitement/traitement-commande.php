@@ -1,8 +1,8 @@
                <?php include("../header.php");?>
-               <li><a href="http://localhost/bdd/index.php">Accueil</a></li>
-               <li class="actif"><a href="http://localhost/bdd/commande.php">Nouvelle commande</a></li>
-               <li><a href="http://localhost/bdd/consultation.php">Consultation</a></li>
-               <li><a href="http://localhost/bdd/administration.php">Administration</a></li>
+               <li><a href="../index.php">Accueil</a></li>
+               <li class="actif"><a href="../commande.php">Nouvelle commande</a></li>
+               <li><a href="../consultation.php">Consultation</a></li>
+               <li><a href="../administration.php">Administration</a></li>
             </ul>
          </nav>
          <div id="texte">

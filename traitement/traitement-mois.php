@@ -1,14 +1,14 @@
 <?php include("../header.php");?>
-               <li><a href="http://localhost/bdd/index.php">Accueil</a></li>
-               <li><a href="http://localhost/bdd/commande.php">Nouvelle commande</a></li>
-               <li class="actif"><a href="http://localhost/bdd/consultation.php">Consultation</a></li>
-               <li><a href="http://localhost/bdd/administration.php">Administration</a></li>
+               <li><a href="../index.php">Accueil</a></li>
+               <li><a href="../commande.php">Nouvelle commande</a></li>
+               <li class="actif"><a href="../consultation.php">Consultation</a></li>
+               <li><a href="../administration.php">Administration</a></li>
             </ul>
          </nav>
          <div id="panneau">
             <ul>
-               <li><a href="http://localhost/bdd/traitement/traitement-ancien.php">Ancienne commande</a></li>
-               <li class="actif"><a href="http://localhost/bdd/traitement/traitement-mois.php">Recapitulatif mensuel</a></li>
+               <li><a href="traitement-ancien.php">Ancienne commande</a></li>
+               <li class="actif"><a href="traitement-mois.php">Recapitulatif mensuel</a></li>
             </ul>
          </div>
          <div id="texte">
