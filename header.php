@@ -15,7 +15,7 @@ include_once($path."/traitement/fonctions.php");
       <meta name="description" content="Gestion des restaurants de l'entreprise Au marché couvert.">
       <meta name="author" content="Julien Stechele">
       <!-- Renvoi vers un fichier séparé style.css -->
-      <link href="style.css" type="text/css" rel="stylesheet" media="screen">
+      <link href="http://localhost/amc/style.css" type="text/css" rel="stylesheet" media="screen">
    </head>
    <body>
 <?php
