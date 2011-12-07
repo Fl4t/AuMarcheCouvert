@@ -125,7 +125,7 @@ else
     echo '<tr><td><label for="listeAnnee">Choisissez une année : </label></td>';
     echo '<td><select name="listeAnnee" id="listeAnnee">';
     echo '<option value="Vide" selected="selected"></option>';
-    for ($intAnnee=2000;$intAnnee<=2020;$intAnnee++)
+    for ($intAnnee=2010;$intAnnee<=2012;$intAnnee++)
     {
         echo '<option value="' . $intAnnee . '">' . $intAnnee . '</option>';
     }
