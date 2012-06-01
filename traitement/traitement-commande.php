@@ -29,8 +29,8 @@
                        echo '<tr>';
                        echo '<td class="recapitulatif">' . stripslashes(htmlspecialchars($_SESSION['Panier']['DesignProduit'][$intAffichage])) . '</td>';
                        echo '<td class="recapitulatif">' . htmlspecialchars($_SESSION['Panier']['QuantiteProduit'][$intAffichage]) . '</td>';
-                       echo '<td class="recapitulatif">' . htmlspecialchars($_SESSION['Panier']['PrixDuJour'][$intAffichage]) . ' €</td>';
-                       echo '<td class="recapitulatif">' . htmlspecialchars($_SESSION['Panier']['PrixDuJour'][$intAffichage])*htmlspecialchars($_SESSION['Panier']['QuantiteProduit'][$intAffichage]) . ' €</td>';
+                       echo '<td class="recapitulatif">' . htmlspecialchars(number_format($_SESSION['Panier']['PrixDuJour'][$intAffichage], 2)) . ' €</td>';
+                       echo '<td class="recapitulatif">' . htmlspecialchars(number_format($_SESSION['Panier']['PrixDuJour'][$intAffichage], 2))*htmlspecialchars(number_format($_SESSION['Panier']['QuantiteProduit'][$intAffichage], 2)) . ' €</td>';
                        echo '</tr>';
                        // Calcul du Prix Total
                        $fltTotalHT += htmlspecialchars($_SESSION['Panier']['PrixDuJour'][$intAffichage])*htmlspecialchars($_SESSION['Panier']['QuantiteProduit'][$intAffichage]);
@@ -39,7 +39,7 @@
                    echo '<td></td>';
                    echo '<td></td>';
                    echo '<td class="centrer"><b>Prix Total :</b></td>';
-                   echo '<td class="centrer">' . $fltTotalHT . ' €</td>';
+                   echo '<td class="centrer">' . number_format($fltTotalHT, 2) . ' €</td>';
                    echo '</tr>';
                    echo '</tbody></table>';
                    //formulaire de test pour ecrire la commande dans la base de donnée

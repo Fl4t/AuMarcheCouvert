@@ -5,9 +5,9 @@
 //                                          //
 //////////////////////////////////////////////
 
-//
-// On se connecte sur la base de donnée en passant par un essai
-//
+/*
+ *On se connecte sur la base de donnée en passant par un essai
+ */
 function F_ConnexionBDD()
 {
    try
@@ -21,9 +21,9 @@ function F_ConnexionBDD()
    }
 }
 
-//
-// On affecte toutes les valeurs de la superglobale $_POST à $_SESSION si ils sont valide.
-//
+/*
+ *On affecte toutes les valeurs de la superglobale $_POST à $_SESSION si ils sont valide.
+ */
 function P_TransfertPostDansSession()
 {
    // Si le restaurant a été renseigné, on continue.
@@ -52,16 +52,11 @@ function P_TransfertPostDansSession()
       }
    }
    $_SESSION['NombreDeProduits'] = count($_SESSION['Panier']['DesignProduit']);
-   // affichage pour savoir si c'est fait.
-   echo '<pre>';
-   echo 'SESSION : <br />';
-   print_r($_SESSION);
-   echo '</pre>';
 }
 
-//
-// Recupère le code du restaurant a partir du nom du restaurant fourni en paramètre.
-//
+/*
+ *Recupère le code du restaurant a partir du nom du restaurant fourni en paramètre.
+ */
 function F_CodeDuRestaurant($strNomRestaurant)
 {
    global $objBDD; // On travaille sur la variable globale $objBDD.
@@ -80,9 +75,9 @@ function F_CodeDuRestaurant($strNomRestaurant)
    }
 }
 
-//
-// Création de nouvelle commande
-//
+/*
+ *Création de nouvelle commande
+ */
 function P_CreationCommande($intCodeRestaurant)
 {
    try
@@ -98,9 +93,9 @@ function P_CreationCommande($intCodeRestaurant)
    }
 }
 
-//
-// Connaitre la référence d'un produit via son nom
-//
+/*
+ *Connaitre la référence d'un produit via son nom
+ */
 function F_RefDuProduit($strNomProduit)
 {
    try
@@ -119,9 +114,9 @@ function F_RefDuProduit($strNomProduit)
    }
 }
 
-//
-// Ajout des lignes dans Contenir correspondant a une commande.
-//
+/*
+ *Ajout des lignes dans Contenir correspondant a une commande.
+ */
 function P_AjoutDesProduits($RefProduit,$intDerniereID,$QteCommande,$PrixDuJour)
 {
    try
@@ -141,9 +136,9 @@ function P_AjoutDesProduits($RefProduit,$intDerniereID,$QteCommande,$PrixDuJour)
    }
 }
 
-//
-// Fonction d'ajout d'un nouveau restaurant
-//
+/*
+ *Fonction d'ajout d'un nouveau restaurant
+ */
 function P_AjoutRestaurant($NomRestaurant,$Adr1Restaurant,$Adr2Restaurant,$CpRestaurant,$VilleRestaurant,$MelRestaurant,$TelRestaurant)
 {
    try
@@ -166,9 +161,9 @@ function P_AjoutRestaurant($NomRestaurant,$Adr1Restaurant,$Adr2Restaurant,$CpRes
    }
 }
 
-//
-// Ajout de nouveau produit
-//
+/*
+ *Ajout de nouveau produit
+ */
 function P_AjoutProduit($DesignProduit,$PrixProduit,$UniteVente)
 {
    try
@@ -187,10 +182,10 @@ function P_AjoutProduit($DesignProduit,$PrixProduit,$UniteVente)
    }
 }
 
-//
-// Donne les informations d'un restaurant graçe a son nom
-// Utiliser dans la modification d'un restaurant
-//
+/*
+ *Donne les informations d'un restaurant graçe a son nom
+ *Utiliser dans la modification d'un restaurant
+ */
 function F_ValeurDuRestaurant($strNomRestaurant)
 {
    try
@@ -209,10 +204,10 @@ function F_ValeurDuRestaurant($strNomRestaurant)
    }
 }
 
-//
-// Donne les informations d'un produit graçe a son nom
-// Utiliser dans la modification d'un produit
-//
+/*
+ *Donne les informations d'un produit graçe a son nom
+ *Utiliser dans la modification d'un produit
+ */
 function F_ValeurDuProduit($strNomProduit)
 {
    try
@@ -231,9 +226,9 @@ function F_ValeurDuProduit($strNomProduit)
    }
 }
 
-//
-// Mise à jour du restaurant actuellement modifié
-//
+/*
+ *Mise à jour du restaurant actuellement modifié
+ */
 function P_MAJRestaurant($SauvegardeNomRestaurant,$NomRestaurant,$Adr1Restaurant,$Adr2Restaurant,$CpRestaurant,$VilleRestaurant,$MelRestaurant,$TelRestaurant)
 {
    try
@@ -256,9 +251,9 @@ function P_MAJRestaurant($SauvegardeNomRestaurant,$NomRestaurant,$Adr1Restaurant
    }
 }
 
-//
-// Mise à jour du produit actuellement modifié
-//
+/*
+ *Mise à jour du produit actuellement modifié
+ */
 function P_MAJProduit($SauvegardeNomProduits,$DesignProduit,$PrixProduit,$UniteVente)
 {
    try
@@ -278,9 +273,9 @@ function P_MAJProduit($SauvegardeNomProduits,$DesignProduit,$PrixProduit,$UniteV
    }
 }
 
-//
-// Suppression pur et simple du restaurant graçe à son nom
-//
+/*
+ *Suppression pur et simple du restaurant graçe à son nom
+ */
 function P_SuppressionRestaurant($NomRestaurant)
 {
    try
@@ -296,9 +291,9 @@ function P_SuppressionRestaurant($NomRestaurant)
    }
 }
 
-//
-// Suppression pur et simple du Produit graçe à son nom
-//
+/*
+ *Suppression pur et simple du Produit graçe à son nom
+ */
 function P_SuppressionProduit($DesignProduit)
 {
    try

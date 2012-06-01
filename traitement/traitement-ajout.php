@@ -55,11 +55,6 @@ if (isset($_POST['ajout']))
         echo '</p>';
     }
 }
-//affichage pour savoir si c'est fait.
-//echo '<pre>';
-//echo 'POST : <br />';
-//print_r($_POST);
-//echo '</pre>';
 if (isset($_POST['NomRestaurant']))
 {
     if (empty($_POST['NomRestaurant']) || empty($_POST['CpRestaurant']) || empty($_POST['VilleRestaurant']))
